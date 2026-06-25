@@ -1,450 +1,201 @@
-# PROJECT ROADMAP AND SPRINT STATUS
+# AI Placement Platform
 
-## Project Overview
-
-Project Name:
-AI Placement Platform
-
-Founder:
-Harsha Varthan
-
-Current Version:
-v0.1.0
-
-Current Phase:
-MVP Development
-
-Goal:
-Build an AI-powered placement preparation platform that helps engineering students improve placement readiness through:
-
-* Resume Analysis
-* Interview Preparation
-* Company-Specific Preparation
-* Placement Readiness Tracking
-* AI-Powered Feedback
+## Project Roadmap & Sprint Status
 
 ---
 
-# Technology Stack
+# Sprint 1 – Authentication Module
 
-## Frontend
+## Status
 
-* React 18
-* Material UI
-* Axios
-* React Router DOM
-
-## Backend
-
-* Java 17
-* Spring Boot 3
-* Spring Security 6
-* JWT Authentication
-* Maven
-
-## Database
-
-* MySQL
-
-## AI
-
-* Gemini API
-
-## Deployment
-
-Frontend:
-
-* Vercel
-
-Backend:
-
-* AWS EC2
-
-Containerization:
-
-* Docker
-
----
-
-# Development Workflow
-
-## Roles
-
-ChatGPT:
-
-* Product Architect
-* Technical Reviewer
-* Sprint Planner
-
-Claude:
-
-* Senior Developer
-* Large Module Generation
-* Architecture-Aware Coding
-
-Antigravity:
-
-* Project Builder
-* File Creation
-* Refactoring
-* Implementation
-
----
-
-# Sprint Status
-
-## Sprint 1 — Authentication Module
-
-Status:
-COMPLETED ✅
-
-### Objective
-
-Provide secure user authentication and authorization.
+COMPLETED
 
 ### Deliverables
 
-* User Entity
-* Role Enum
-* User Repository
-* DTOs
-* Auth Service
-* JWT Service
-* JWT Filter
-* Security Configuration
-* Auth Controller
-* Health Controller
-* Global Exception Handler
-
-### Features Completed
-
 * User Registration
 * User Login
-* Password Encryption (BCrypt)
-* JWT Generation
-* JWT Validation
-* Role Support
-* Account Status Support
-* Protected API Foundation
+* JWT Authentication
+* BCrypt Password Encryption
+* Spring Security Configuration
+* Global Exception Handling
 
-### APIs Completed
-
-POST /api/auth/register
-
-POST /api/auth/login
-
-GET /api/health
-
-### Validation Completed
-
-* Backend Compiles Successfully
-* MySQL Connectivity Verified
-* Registration Tested
-* Login Tested
-* JWT Generation Verified
-* Health Endpoint Verified
-
-### Git Milestone
-
-Commit:
-
-Sprint 1 Authentication Module Completed
-
-Tag:
+### Git Tag
 
 sprint-1-completed
 
 ---
 
-# Sprint 2 — Student Profile Module
+# Sprint 2 – Student Profile Module
 
-Status:
-NEXT
+## Status
 
-### Objective
+COMPLETED
 
-Allow authenticated students to view and manage their placement profile.
-
-### Features
+### Deliverables
 
 * View Profile
 * Update Profile
-* JWT Protected Access
+* JWT Protected Profile Access
+* Profile Validation
+* Profile Mapper Layer
 
-### Fields
+### Git Tag
 
-* Name
-* Email
-* College
-* Degree
-* Branch
-* CGPA
-* Graduation Year
-* Target Role
-
-### APIs
-
-GET /api/profile/me
-
-PUT /api/profile/me
-
-### Success Criteria
-
-* User can view own profile
-* User can update own profile
-* Data persists in database
-* JWT authentication enforced
+sprint-2-completed
 
 ---
 
-# Sprint 3 — Skills & Target Companies Module
+# Sprint 3 – Skills & Target Companies Module
 
-Status:
-PLANNED
+## Status
 
-### Objective
+COMPLETED
 
-Allow users to manage skills and target companies.
+### Deliverables
 
-### Features
+#### Skills
 
 * Add Skill
-* Remove Skill
-* List Skills
+* View Skills
+* Delete Skill
+
+#### Target Companies
+
 * Add Target Company
-* Remove Target Company
+* View Target Companies
+* Delete Target Company
 
-### APIs
+#### Additional Features
 
-GET /api/skills
+* Duplicate Prevention
+* JWT Protected Access
+* Validation
+* Database Persistence
 
-POST /api/skills
+### Git Tag
 
-DELETE /api/skills/{id}
-
-GET /api/companies
-
-POST /api/companies
-
-DELETE /api/companies/{id}
-
-### Success Criteria
-
-* Skills linked to user
-* Target companies linked to user
+sprint-3-completed
 
 ---
 
-# Sprint 4 — Dashboard Module
+# Sprint 4 – Resume Management Module
 
-Status:
-PLANNED
+## Status
 
-### Objective
+NOT STARTED
 
-Provide placement readiness overview.
-
-### Features
-
-* Profile Completion %
-* ATS Score Placeholder
-* Interview Score Placeholder
-* Skills Count
-* Target Companies Count
-
-### APIs
-
-GET /api/dashboard
-
-### Success Criteria
-
-* Dashboard loads user metrics
-* Responsive UI
-
----
-
-# Sprint 5 — Resume Analyzer Module
-
-Status:
-PLANNED
-
-### Objective
-
-Analyze resumes using Gemini AI.
-
-### Features
+### Planned Deliverables
 
 * Resume Upload
-* ATS Score Generation
-* Resume Feedback
-* Improvement Suggestions
-
-### APIs
-
-POST /api/resume/upload
-
-GET /api/resume/{id}
-
-### AI Integration
-
-Gemini API
-
-### Success Criteria
-
-* Resume uploaded successfully
-* AI feedback generated
-* ATS score displayed
+* Resume Download
+* Resume Replacement
+* Resume Metadata Storage
+* File Validation
+* JWT Protected Resume Access
 
 ---
 
-# Sprint 6 — Company Hub Module
+# Sprint 5 – Placement Tracking Module
 
-Status:
-PLANNED
+## Status
 
-### Objective
+NOT STARTED
 
-Provide company-specific preparation resources.
+### Planned Deliverables
 
-### Initial Companies
-
-* Cognizant
-* TCS
-* Infosys
-* Accenture
-* EY
-* Wipro
-
-### Features
-
-* Hiring Process
-* Technical Topics
-* HR Questions
-* Preparation Tips
-
-### APIs
-
-GET /api/companies
-
-GET /api/companies/{id}
+* Company Tracking
+* Application Tracking
+* Interview Tracking
+* Offer Tracking
+* Placement Progress Tracking
 
 ---
 
-# Sprint 7 — Interview Simulator Module
+# Sprint 6 – Dashboard Module
 
-Status:
-PLANNED
+## Status
 
-### Objective
+NOT STARTED
 
-Conduct AI-powered mock interviews.
+### Planned Deliverables
 
-### Features
-
-* Company Selection
-* Role Selection
-* Difficulty Selection
-* AI Question Generation
-* AI Evaluation
-
-### AI Integration
-
-Gemini API
-
-### APIs
-
-POST /api/interview/start
-
-POST /api/interview/answer
-
-GET /api/interview/report/{id}
-
-### Success Criteria
-
-* Questions generated
-* Answers evaluated
-* Final report generated
+* Student Dashboard
+* Placement Statistics
+* Progress Visualization
+* Skills Overview
+* Target Company Overview
 
 ---
 
-# Sprint 8 — Frontend Integration
+# Sprint 7 – AI Resume Analyzer
 
-Status:
-PLANNED
+## Status
 
-### Objective
+NOT STARTED
 
-Connect React frontend to backend APIs.
+### Planned Deliverables
 
-### Features
-
-* Authentication UI
-* Profile UI
-* Dashboard UI
-* Resume UI
-* Interview UI
-
-### Success Criteria
-
-* End-to-end user flow works
+* Resume Parsing
+* Skill Extraction
+* Resume Insights
+* Resume Strength Analysis
+* AI Recommendations
 
 ---
 
-# Sprint 9 — Deployment
+# Sprint 8 – AI Gap Analysis
 
-Status:
-PLANNED
+## Status
 
-### Objective
+NOT STARTED
 
-Deploy MVP publicly.
+### Planned Deliverables
 
-### Frontend
-
-Vercel
-
-### Backend
-
-AWS EC2
-
-### Database
-
-MySQL
-
-### Containerization
-
-Docker
-
-### Success Criteria
-
-* Public URL available
-* Secure environment variables
-* Production configuration
+* Skill Gap Detection
+* Career Recommendations
+* Learning Roadmaps
+* AI Placement Readiness Score
 
 ---
 
-# MVP Completion Criteria
+# Current Project Status
 
-The MVP is considered complete when:
+## Current Version
 
-* Authentication works
-* Profile management works
-* Resume analysis works
-* Company preparation works
-* Interview simulator works
-* Frontend is integrated
-* Platform is deployed
+v0.3.0
+
+## Completed Sprints
+
+* Sprint 1
+* Sprint 2
+* Sprint 3
+
+## Current Focus
+
+Sprint 4 – Resume Management Module
+
+## Backend Progress
+
+Completed:
+
+* Authentication
+* Student Profile Management
+* Skills Management
+* Target Company Management
+
+Pending:
+
+* Resume Module
+* Placement Tracking
+* Dashboard
+* AI Features
 
 ---
 
-# Current Focus
+# Next Milestone
 
-Current Sprint:
+Sprint 4 Completion
 
-Sprint 2 — Student Profile Module
+Target Outcome:
 
-Immediate Goal:
-
-Create implementation plan for profile management before generating code.
-
-No code should be generated for Sprint 2 until the implementation plan has been reviewed and approved.
+A student should be able to upload, replace, download, and manage resumes securely through JWT-protected APIs.
