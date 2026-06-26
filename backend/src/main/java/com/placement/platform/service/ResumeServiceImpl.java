@@ -9,6 +9,7 @@ import com.placement.platform.exception.ResourceNotFoundException;
 import com.placement.platform.exception.ResumeAlreadyExistsException;
 import com.placement.platform.exception.UserNotFoundException;
 import com.placement.platform.mapper.ResumeMapper;
+import com.placement.platform.repository.ResumeAnalysisRepository;
 import com.placement.platform.repository.ResumeRepository;
 import com.placement.platform.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,16 +36,19 @@ public class ResumeServiceImpl implements ResumeService {
     private final UserRepository userRepository;
     private final ResumeMapper resumeMapper;
     private final Path rootLocation;
+    private final ResumeAnalysisRepository resumeAnalysisRepository;
 
     public ResumeServiceImpl(
             ResumeRepository resumeRepository,
             UserRepository userRepository,
             ResumeMapper resumeMapper,
+            ResumeAnalysisRepository resumeAnalysisRepository,
             @Value("${application.resume.upload-dir:uploads/resumes}") String uploadDir
     ) {
         this.resumeRepository = resumeRepository;
         this.userRepository = userRepository;
         this.resumeMapper = resumeMapper;
+        this.resumeAnalysisRepository = resumeAnalysisRepository;
         this.rootLocation = Paths.get(uploadDir);
         try {
             Files.createDirectories(this.rootLocation);
@@ -130,6 +134,11 @@ public class ResumeServiceImpl implements ResumeService {
 
         validateFile(file);
 
+        // Delete existing analysis if it exists to invalidate cache
+        if (resumeAnalysisRepository.existsByResume(existingResume)) {
+            resumeAnalysisRepository.deleteByResume(existingResume);
+        }
+
         // Delete the old file from disk
         Path oldPath = Paths.get(existingResume.getFilePath());
         try {
@@ -172,6 +181,11 @@ public class ResumeServiceImpl implements ResumeService {
         User user = getAuthenticatedUser();
         Resume resume = resumeRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("No resume found for the current user."));
+
+        // Delete existing analysis if it exists
+        if (resumeAnalysisRepository.existsByResume(resume)) {
+            resumeAnalysisRepository.deleteByResume(resume);
+        }
 
         // Delete from disk
         Path filePath = Paths.get(resume.getFilePath());

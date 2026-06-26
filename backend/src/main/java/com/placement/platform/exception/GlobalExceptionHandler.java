@@ -122,6 +122,33 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ResumeExtractionException.class)
+    public ResponseEntity<ErrorResponse> handleResumeExtraction(ResumeExtractionException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(GeminiApiException.class)
+    public ResponseEntity<ErrorResponse> handleGeminiApi(GeminiApiException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.BAD_GATEWAY.value(),
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_GATEWAY);
+    }
+
+    @ExceptionHandler(ResumeAnalysisException.class)
+    public ResponseEntity<ErrorResponse> handleResumeAnalysis(ResumeAnalysisException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex) {
         ErrorResponse error = new ErrorResponse(
