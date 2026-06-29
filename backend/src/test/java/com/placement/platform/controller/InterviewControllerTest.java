@@ -1,12 +1,8 @@
 package com.placement.platform.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.placement.platform.dto.InterviewAvailabilityResponseDto;
-import com.placement.platform.dto.InterviewSessionResponseDto;
-import com.placement.platform.dto.StartInterviewRequestDto;
-import com.placement.platform.entity.InterviewDifficulty;
-import com.placement.platform.entity.InterviewMode;
-import com.placement.platform.entity.InterviewStatus;
+import com.placement.platform.dto.*;
+import com.placement.platform.entity.*;
 import com.placement.platform.service.InterviewService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -38,7 +35,6 @@ public class InterviewControllerTest {
     @MockBean
     private InterviewService interviewService;
 
-    // We must mock security-related beans that are needed by SecurityConfig during WebMvcTest loading
     @MockBean
     private com.placement.platform.security.JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -50,7 +46,7 @@ public class InterviewControllerTest {
         LocalDateTime nextAvailable = LocalDateTime.of(2026, 6, 28, 18, 0, 0);
         InterviewAvailabilityResponseDto response = new InterviewAvailabilityResponseDto(
                 false, nextAvailable, 4, 30
-        );
+            );
 
         when(interviewService.checkAvailability()).thenReturn(response);
 
@@ -68,7 +64,7 @@ public class InterviewControllerTest {
         LocalDateTime startedAt = LocalDateTime.of(2026, 6, 28, 14, 0, 0);
         InterviewSessionResponseDto response = new InterviewSessionResponseDto(
                 101L, InterviewMode.MOCK, InterviewStatus.IN_PROGRESS, startedAt
-        );
+            );
 
         when(interviewService.startInterview(any(StartInterviewRequestDto.class))).thenReturn(response);
 
@@ -83,7 +79,6 @@ public class InterviewControllerTest {
 
     @Test
     void startInterview_InvalidRequest_MissingMode_ShouldReturnBadRequest() throws Exception {
-        // Mode is null (violates @NotNull)
         StartInterviewRequestDto request = new StartInterviewRequestDto(null, InterviewDifficulty.MEDIUM);
 
         mockMvc.perform(post("/api/interview/start")
@@ -93,22 +88,97 @@ public class InterviewControllerTest {
     }
 
     @Test
-    void startInterview_OptionalDifficulty_ShouldReturnSuccess() throws Exception {
-        // Difficulty is null (should be allowed and defaulted by service)
-        StartInterviewRequestDto request = new StartInterviewRequestDto(InterviewMode.LEARNING, null);
+    void getCurrentQuestion_ShouldReturnQuestion() throws Exception {
+        InterviewQuestionResponseDto questionResponse = new InterviewQuestionResponseDto(
+                200L,
+                "Explain inheritance.",
+                "OOP",
+                InterviewDifficulty.MEDIUM,
+                QuestionCategory.TECHNICAL,
+                1,
+                QuestionSource.PERSONALIZED,
+                SessionQuestionStatus.CURRENT
+            );
 
-        LocalDateTime startedAt = LocalDateTime.of(2026, 6, 28, 14, 0, 0);
-        InterviewSessionResponseDto response = new InterviewSessionResponseDto(
-                102L, InterviewMode.LEARNING, InterviewStatus.IN_PROGRESS, startedAt
-        );
+        when(interviewService.getCurrentQuestion()).thenReturn(questionResponse);
 
-        when(interviewService.startInterview(any(StartInterviewRequestDto.class))).thenReturn(response);
+        mockMvc.perform(get("/api/interview/current-question"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.sessionQuestionId").value(200))
+                .andExpect(jsonPath("$.question").value("Explain inheritance."))
+                .andExpect(jsonPath("$.status").value("CURRENT"));
+    }
 
-        mockMvc.perform(post("/api/interview/start")
+    @Test
+    void answerCurrentQuestion_ShouldReturnOk() throws Exception {
+        SubmitAnswerRequestDto request = new SubmitAnswerRequestDto(AnswerType.TEXT, "Inheritance is...", null, 45);
+
+        doNothing().when(interviewService).answerCurrentQuestion(any(SubmitAnswerRequestDto.class));
+
+        mockMvc.perform(post("/api/interview/answer")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk());
+
+        verify(interviewService, times(1)).answerCurrentQuestion(any(SubmitAnswerRequestDto.class));
+    }
+
+    @Test
+    void goToNextQuestion_ShouldReturnProgress() throws Exception {
+        InterviewProgressResponseDto progressResponse = new InterviewProgressResponseDto(
+                101L,
+                InterviewMode.MOCK,
+                InterviewStatus.IN_PROGRESS,
+                15,
+                1,
+                1,
+                14,
+                Collections.emptyList()
+            );
+
+        when(interviewService.goToNextQuestion()).thenReturn(progressResponse);
+
+        mockMvc.perform(post("/api/interview/next"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.sessionId").value(102))
-                .andExpect(jsonPath("$.mode").value("LEARNING"));
+                .andExpect(jsonPath("$.currentQuestionIndex").value(1))
+                .andExpect(jsonPath("$.remainingQuestions").value(14));
+    }
+
+    @Test
+    void getProgress_ShouldReturnProgress() throws Exception {
+        InterviewProgressResponseDto progressResponse = new InterviewProgressResponseDto(
+                101L,
+                InterviewMode.MOCK,
+                InterviewStatus.IN_PROGRESS,
+                15,
+                0,
+                0,
+                15,
+                Collections.emptyList()
+            );
+
+        when(interviewService.getProgress()).thenReturn(progressResponse);
+
+        mockMvc.perform(get("/api/interview/progress"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalQuestions").value(15))
+                .andExpect(jsonPath("$.remainingQuestions").value(15));
+    }
+
+    @Test
+    void completeInterview_ShouldReturnSession() throws Exception {
+        LocalDateTime completedAt = LocalDateTime.now();
+        InterviewSessionResponseDto response = new InterviewSessionResponseDto(
+                101L,
+                InterviewMode.MOCK,
+                InterviewStatus.COMPLETED,
+                completedAt
+            );
+
+        when(interviewService.completeInterview()).thenReturn(response);
+
+        mockMvc.perform(post("/api/interview/complete"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("COMPLETED"));
     }
 }

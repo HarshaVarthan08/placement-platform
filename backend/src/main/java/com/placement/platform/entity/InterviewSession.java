@@ -42,6 +42,9 @@ public class InterviewSession {
     @Column(name = "total_questions")
     private Integer totalQuestions;
 
+    @Column(name = "current_question_index", nullable = false)
+    private Integer currentQuestionIndex = 0;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_pool_id")
     private InterviewQuestionPool questionPool;
@@ -119,6 +122,14 @@ public class InterviewSession {
 
     public void setTotalQuestions(Integer totalQuestions) {
         this.totalQuestions = totalQuestions;
+    }
+
+    public Integer getCurrentQuestionIndex() {
+        return currentQuestionIndex;
+    }
+
+    public void setCurrentQuestionIndex(Integer currentQuestionIndex) {
+        this.currentQuestionIndex = currentQuestionIndex;
     }
 
     public InterviewQuestionPool getQuestionPool() {
