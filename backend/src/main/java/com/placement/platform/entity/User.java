@@ -54,6 +54,12 @@ public class User implements UserDetails {
     @Column(name = "target_role", length = 100)
     private String targetRole;
 
+    @Column(name = "projects", columnDefinition = "TEXT")
+    private String projects;
+
+    @Column(name = "internship", columnDefinition = "TEXT")
+    private String internship;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -217,5 +223,21 @@ public class User implements UserDetails {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getProjects() {
+        return projects;
+    }
+
+    public void setProjects(String projects) {
+        this.projects = projects;
+    }
+
+    public String getInternship() {
+        return internship;
+    }
+
+    public void setInternship(String internship) {
+        this.internship = internship;
     }
 }

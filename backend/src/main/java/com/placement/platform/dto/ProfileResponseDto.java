@@ -11,5 +11,7 @@ public record ProfileResponseDto(
     String branch,
     BigDecimal cgpa,
     Integer graduationYear,
-    String targetRole
+    String targetRole,
+    String projects,
+    String internship
 ) {}

@@ -31,5 +31,11 @@ public record UpdateProfileRequestDto(
     Integer graduationYear,
 
     @Size(max = 100, message = "Target role must not exceed 100 characters")
-    String targetRole
+    String targetRole,
+
+    @Size(max = 2000, message = "Projects must not exceed 2000 characters")
+    String projects,
+
+    @Size(max = 2000, message = "Internship must not exceed 2000 characters")
+    String internship
 ) {}

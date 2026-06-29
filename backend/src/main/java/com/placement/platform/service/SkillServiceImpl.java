@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.placement.platform.service.InterviewProfileService;
+
 @Service
 public class SkillServiceImpl implements SkillService {
 
@@ -28,17 +30,20 @@ public class SkillServiceImpl implements SkillService {
     private final SkillRepository skillRepository;
     private final UserSkillRepository userSkillRepository;
     private final SkillMapper skillMapper;
+    private final InterviewProfileService interviewProfileService;
 
     public SkillServiceImpl(
             UserRepository userRepository,
             SkillRepository skillRepository,
             UserSkillRepository userSkillRepository,
-            SkillMapper skillMapper
+            SkillMapper skillMapper,
+            InterviewProfileService interviewProfileService
     ) {
         this.userRepository = userRepository;
         this.skillRepository = skillRepository;
         this.userSkillRepository = userSkillRepository;
         this.skillMapper = skillMapper;
+        this.interviewProfileService = interviewProfileService;
     }
 
     @Override
@@ -75,6 +80,8 @@ public class SkillServiceImpl implements SkillService {
         UserSkill userSkill = new UserSkill(user, skill);
         userSkillRepository.save(userSkill);
 
+        interviewProfileService.incrementProfileVersion(user);
+
         return skillMapper.toDto(skill);
     }
 
@@ -87,6 +94,7 @@ public class SkillServiceImpl implements SkillService {
                 .orElseThrow(() -> new ResourceNotFoundException("Skill mapping not found in your profile."));
 
         userSkillRepository.delete(userSkill);
+        interviewProfileService.incrementProfileVersion(user);
     }
 
     private User getAuthenticatedUser() {

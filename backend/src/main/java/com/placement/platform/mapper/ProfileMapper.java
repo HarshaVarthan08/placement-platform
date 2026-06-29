@@ -20,7 +20,9 @@ public class ProfileMapper {
                 user.getBranch(),
                 user.getCgpa(),
                 user.getGraduationYear(),
-                user.getTargetRole()
+                user.getTargetRole(),
+                user.getProjects(),
+                user.getInternship()
         );
     }
 }

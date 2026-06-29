@@ -29,6 +29,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import com.placement.platform.service.InterviewProfileService;
+
 @Service
 public class ResumeServiceImpl implements ResumeService {
 
@@ -37,18 +39,21 @@ public class ResumeServiceImpl implements ResumeService {
     private final ResumeMapper resumeMapper;
     private final Path rootLocation;
     private final ResumeAnalysisRepository resumeAnalysisRepository;
+    private final InterviewProfileService interviewProfileService;
 
     public ResumeServiceImpl(
             ResumeRepository resumeRepository,
             UserRepository userRepository,
             ResumeMapper resumeMapper,
             ResumeAnalysisRepository resumeAnalysisRepository,
+            InterviewProfileService interviewProfileService,
             @Value("${application.resume.upload-dir:uploads/resumes}") String uploadDir
     ) {
         this.resumeRepository = resumeRepository;
         this.userRepository = userRepository;
         this.resumeMapper = resumeMapper;
         this.resumeAnalysisRepository = resumeAnalysisRepository;
+        this.interviewProfileService = interviewProfileService;
         this.rootLocation = Paths.get(uploadDir);
         try {
             Files.createDirectories(this.rootLocation);
@@ -172,6 +177,7 @@ public class ResumeServiceImpl implements ResumeService {
         existingResume.setFileSize(file.getSize());
 
         Resume updatedResume = resumeRepository.save(existingResume);
+        interviewProfileService.incrementProfileVersion(user);
         return resumeMapper.toDto(updatedResume);
     }
 
