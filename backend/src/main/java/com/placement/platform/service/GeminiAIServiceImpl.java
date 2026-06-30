@@ -118,6 +118,59 @@ public class GeminiAIServiceImpl implements GeminiAIService {
     }
 
     @Override
+    public String evaluateInterview(String evaluationPrompt) {
+        if (apiKey == null || apiKey.trim().isEmpty() || apiKey.equals("${GEMINI_API_KEY}")) {
+            throw new GeminiApiException("Gemini API key is missing or not configured. Please set the GEMINI_API_KEY environment variable.");
+        }
+
+        String url = "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent?key=" + apiKey;
+
+        // Build Payload
+        Map<String, Object> requestBody = new HashMap<>();
+
+        Map<String, Object> textPart = new HashMap<>();
+        textPart.put("text", evaluationPrompt);
+
+        Map<String, Object> partsObj = new HashMap<>();
+        partsObj.put("parts", Collections.singletonList(textPart));
+
+        requestBody.put("contents", Collections.singletonList(partsObj));
+
+        Map<String, Object> generationConfig = new HashMap<>();
+        generationConfig.put("responseMimeType", "application/json");
+        requestBody.put("generationConfig", generationConfig);
+
+        ResponseEntity<String> response;
+        try {
+            response = restTemplate.postForEntity(url, requestBody, String.class);
+        } catch (Exception e) {
+            throw new GeminiApiException("Failed to communicate with Gemini API: " + e.getMessage(), e);
+        }
+
+        if (!response.getStatusCode().is2xxSuccessful() || response.getBody() == null) {
+            throw new GeminiApiException("Gemini API call failed with status: " + response.getStatusCode());
+        }
+
+        try {
+            JsonNode rootNode = objectMapper.readTree(response.getBody());
+            JsonNode candidates = rootNode.path("candidates");
+            if (candidates.isArray() && candidates.size() > 0) {
+                JsonNode parts = candidates.get(0).path("content").path("parts");
+                if (parts.isArray() && parts.size() > 0) {
+                    String rawText = parts.get(0).path("text").asText();
+                    if (rawText != null && !rawText.trim().isEmpty()) {
+                        return cleanJsonString(rawText);
+                    }
+                }
+            }
+            throw new GeminiApiException("Failed to parse evaluation response: Gemini response candidates block was empty or malformed.");
+        } catch (Exception e) {
+            throw new GeminiApiException("Failed to parse Gemini API response: " + e.getMessage(), e);
+        }
+    }
+
+
+    @Override
     public String getModelUsed() {
         return model;
     }

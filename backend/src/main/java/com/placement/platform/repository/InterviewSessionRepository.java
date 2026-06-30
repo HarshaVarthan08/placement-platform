@@ -11,6 +11,7 @@ import java.util.Optional;
 @Repository
 public interface InterviewSessionRepository extends JpaRepository<InterviewSession, Long> {
     Optional<InterviewSession> findFirstByUserAndModeOrderByStartedAtDesc(User user, InterviewMode mode);
+    Optional<InterviewSession> findFirstByUserAndStatusOrderByCompletedAtDesc(User user, InterviewStatus status);
     boolean existsByUserAndStatus(User user, InterviewStatus status);
     Optional<InterviewSession> findByUserAndStatus(User user, InterviewStatus status);
 }

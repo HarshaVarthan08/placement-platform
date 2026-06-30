@@ -18,6 +18,11 @@ public class AIServiceImpl implements AIService {
     }
 
     @Override
+    public String evaluateInterview(String evaluationPrompt) {
+        return geminiAIService.evaluateInterview(evaluationPrompt);
+    }
+
+    @Override
     public String getModelUsed() {
         return geminiAIService.getModelUsed();
     }

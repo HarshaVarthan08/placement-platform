@@ -203,6 +203,7 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+
     @ExceptionHandler(QuestionPoolGenerationException.class)
     public ResponseEntity<ErrorResponse> handleQuestionPoolGeneration(QuestionPoolGenerationException ex) {
         ErrorResponse error = new ErrorResponse(
@@ -211,6 +212,16 @@ public class GlobalExceptionHandler {
         );
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(InterviewEvaluationException.class)
+    public ResponseEntity<ErrorResponse> handleInterviewEvaluation(InterviewEvaluationException ex) {
+        ErrorResponse error = new ErrorResponse(
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage()
+        );
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
 
     @ExceptionHandler({IllegalArgumentException.class, IllegalStateException.class})
     public ResponseEntity<ErrorResponse> handleBadRequestExceptions(RuntimeException ex) {
