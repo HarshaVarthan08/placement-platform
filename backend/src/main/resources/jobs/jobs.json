@@ -1,0 +1,1335 @@
+[
+    {
+        "externalId": "STATIC-001",
+        "company": "Deloitte",
+        "title": "Senior software developer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Pune",
+            "Kochi",
+            "Chennai"
+        ],
+        "requiredSkills": [
+            "AWS",
+            "FastAPI",
+            "Python"
+        ],
+        "preferredSkills": [
+            "Docker",
+            "Git"
+        ],
+        "minimumCGPA": 6.0,
+        "minimumExperience": 0,
+        "salaryMin": 100000,
+        "salaryMax": 130000,
+        "salaryCurrency": "USD",
+        "description": "Join Deloitte as a Senior software developer. We are looking for a motivated candidate with strong expertise in AWS, FastAPI, Python. Preferred experience includes Docker, Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-002",
+        "company": "Oracle",
+        "title": "SDE II",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Docker",
+            "Node",
+            "MongoDB",
+            "TypeScript",
+            "Angular"
+        ],
+        "preferredSkills": [
+            "Git"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 3,
+        "salaryMin": 15,
+        "salaryMax": 17,
+        "salaryCurrency": "INR",
+        "description": "Join Oracle as a SDE II. We are looking for a motivated candidate with strong expertise in Docker, Node, MongoDB, TypeScript, Angular. Preferred experience includes Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-003",
+        "company": "Wipro",
+        "title": "Software Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Bangalore",
+            "Kochi",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "System Design",
+            "Algorithms",
+            "C++"
+        ],
+        "preferredSkills": [
+            "Data Structures",
+            "Git"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 10,
+        "salaryMax": 18,
+        "salaryCurrency": "INR",
+        "description": "Join Wipro as a Software Engineer. We are looking for a motivated candidate with strong expertise in System Design, Algorithms, C++. Preferred experience includes Data Structures, Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-004",
+        "company": "Microsoft",
+        "title": "DevOps Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Gurugram"
+        ],
+        "requiredSkills": [
+            "Node",
+            "React",
+            "JavaScript",
+            "MongoDB"
+        ],
+        "preferredSkills": [
+            "Docker",
+            "TypeScript"
+        ],
+        "minimumCGPA": 8.0,
+        "minimumExperience": 0,
+        "salaryMin": 60000,
+        "salaryMax": 70000,
+        "salaryCurrency": "USD",
+        "description": "Join Microsoft as a DevOps Engineer. We are looking for a motivated candidate with strong expertise in Node, React, JavaScript, MongoDB. Preferred experience includes Docker, TypeScript.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-005",
+        "company": "Cognizant",
+        "title": "Frontend Developer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Gurugram",
+            "Pune"
+        ],
+        "requiredSkills": [
+            "Data Structures",
+            "System Design",
+            "Linux",
+            "C++"
+        ],
+        "preferredSkills": [
+            "Algorithms"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 80000,
+        "salaryMax": 110000,
+        "salaryCurrency": "EUR",
+        "description": "Join Cognizant as a Frontend Developer. We are looking for a motivated candidate with strong expertise in Data Structures, System Design, Linux, C++. Preferred experience includes Algorithms.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-006",
+        "company": "EY",
+        "title": "DevOps Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Chennai",
+            "Kochi",
+            "Pune"
+        ],
+        "requiredSkills": [
+            "Java",
+            "MySQL",
+            "AWS",
+            "Hibernate"
+        ],
+        "preferredSkills": [
+            "Git"
+        ],
+        "minimumCGPA": 7.0,
+        "minimumExperience": 3,
+        "salaryMin": 80000,
+        "salaryMax": 90000,
+        "salaryCurrency": "EUR",
+        "description": "Join EY as a DevOps Engineer. We are looking for a motivated candidate with strong expertise in Java, MySQL, AWS, Hibernate. Preferred experience includes Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-007",
+        "company": "IBM",
+        "title": "Frontend Developer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Chennai",
+            "Bangalore"
+        ],
+        "requiredSkills": [
+            "Java",
+            "PostgreSQL",
+            "Spring",
+            "Spring Boot"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Hibernate",
+            "Docker"
+        ],
+        "minimumCGPA": 6.0,
+        "minimumExperience": 0,
+        "salaryMin": 120000,
+        "salaryMax": 130000,
+        "salaryCurrency": "GBP",
+        "description": "Join IBM as a Frontend Developer. We are looking for a motivated candidate with strong expertise in Java, PostgreSQL, Spring, Spring Boot. Preferred experience includes Git, Hibernate, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-008",
+        "company": "IBM",
+        "title": "Test Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Bangalore"
+        ],
+        "requiredSkills": [
+            "Java",
+            "MySQL",
+            "Docker",
+            "Spring",
+            "Hibernate"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 6.0,
+        "minimumExperience": 3,
+        "salaryMin": 70000,
+        "salaryMax": 90000,
+        "salaryCurrency": "GBP",
+        "description": "Join IBM as a Test Engineer. We are looking for a motivated candidate with strong expertise in Java, MySQL, Docker, Spring, Hibernate. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-009",
+        "company": "Wipro",
+        "title": "Frontend Developer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Gurugram"
+        ],
+        "requiredSkills": [
+            "Java",
+            "AWS",
+            "Spring"
+        ],
+        "preferredSkills": [
+            "MySQL"
+        ],
+        "minimumCGPA": 8.0,
+        "minimumExperience": 0,
+        "salaryMin": 60000,
+        "salaryMax": 80000,
+        "salaryCurrency": "EUR",
+        "description": "Join Wipro as a Frontend Developer. We are looking for a motivated candidate with strong expertise in Java, AWS, Spring. Preferred experience includes MySQL.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-010",
+        "company": "IBM",
+        "title": "Quality Assurance Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Gurugram"
+        ],
+        "requiredSkills": [
+            "HTML",
+            "React",
+            "JavaScript"
+        ],
+        "preferredSkills": [
+            "MongoDB",
+            "Docker"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 1,
+        "salaryMin": 20,
+        "salaryMax": 30,
+        "salaryCurrency": "INR",
+        "description": "Join IBM as a Quality Assurance Engineer. We are looking for a motivated candidate with strong expertise in HTML, React, JavaScript. Preferred experience includes MongoDB, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-011",
+        "company": "Freshworks",
+        "title": "Data Scientist",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Pune",
+            "Hyderabad",
+            "Chennai"
+        ],
+        "requiredSkills": [
+            "NumPy",
+            "Python",
+            "Docker",
+            "AWS",
+            "FastAPI"
+        ],
+        "preferredSkills": [
+            "Git"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 120000,
+        "salaryMax": 130000,
+        "salaryCurrency": "GBP",
+        "description": "Join Freshworks as a Data Scientist. We are looking for a motivated candidate with strong expertise in NumPy, Python, Docker, AWS, FastAPI. Preferred experience includes Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-012",
+        "company": "Zoho",
+        "title": "Backend Developer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Chennai"
+        ],
+        "requiredSkills": [
+            "Data Structures",
+            "Algorithms",
+            "Linux",
+            "C++"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 60000,
+        "salaryMax": 80000,
+        "salaryCurrency": "USD",
+        "description": "Join Zoho as a Backend Developer. We are looking for a motivated candidate with strong expertise in Data Structures, Algorithms, Linux, C++. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-013",
+        "company": "Accenture",
+        "title": "Cloud Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Chennai",
+            "Pune",
+            "Bangalore"
+        ],
+        "requiredSkills": [
+            "Entity Framework",
+            "C#",
+            "SQL Server",
+            "ASP.NET"
+        ],
+        "preferredSkills": [
+            "Git"
+        ],
+        "minimumCGPA": 8.0,
+        "minimumExperience": 0,
+        "salaryMin": 120000,
+        "salaryMax": 130000,
+        "salaryCurrency": "EUR",
+        "description": "Join Accenture as a Cloud Engineer. We are looking for a motivated candidate with strong expertise in Entity Framework, C#, SQL Server, ASP.NET. Preferred experience includes Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-014",
+        "company": "Wipro",
+        "title": "Frontend Developer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Bangalore",
+            "Kochi",
+            "Mumbai"
+        ],
+        "requiredSkills": [
+            "Java",
+            "Docker",
+            "Hibernate"
+        ],
+        "preferredSkills": [
+            "PostgreSQL",
+            "Spring"
+        ],
+        "minimumCGPA": 7.0,
+        "minimumExperience": 1,
+        "salaryMin": 100000,
+        "salaryMax": 140000,
+        "salaryCurrency": "EUR",
+        "description": "Join Wipro as a Frontend Developer. We are looking for a motivated candidate with strong expertise in Java, Docker, Hibernate. Preferred experience includes PostgreSQL, Spring.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-015",
+        "company": "Zoho",
+        "title": "Cloud Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Kochi"
+        ],
+        "requiredSkills": [
+            "Docker",
+            "Node",
+            "AWS",
+            "NestJS",
+            "TypeScript"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 0,
+        "salaryMin": 70000,
+        "salaryMax": 90000,
+        "salaryCurrency": "GBP",
+        "description": "Join Zoho as a Cloud Engineer. We are looking for a motivated candidate with strong expertise in Docker, Node, AWS, NestJS, TypeScript. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-016",
+        "company": "Amazon",
+        "title": "Cloud Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Kochi"
+        ],
+        "requiredSkills": [
+            "AWS",
+            "NestJS",
+            "MongoDB",
+            "TypeScript"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 70000,
+        "salaryMax": 100000,
+        "salaryCurrency": "GBP",
+        "description": "Join Amazon as a Cloud Engineer. We are looking for a motivated candidate with strong expertise in AWS, NestJS, MongoDB, TypeScript. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-017",
+        "company": "Oracle",
+        "title": "Quality Assurance Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Chennai",
+            "Kochi"
+        ],
+        "requiredSkills": [
+            "Data Structures",
+            "System Design",
+            "Algorithms",
+            "C++"
+        ],
+        "preferredSkills": [
+            "Git"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 100000,
+        "salaryMax": 130000,
+        "salaryCurrency": "GBP",
+        "description": "Join Oracle as a Quality Assurance Engineer. We are looking for a motivated candidate with strong expertise in Data Structures, System Design, Algorithms, C++. Preferred experience includes Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-018",
+        "company": "Deloitte",
+        "title": "Full Stack Developer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Gurugram",
+            "Hyderabad",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Express",
+            "HTML",
+            "CSS",
+            "React",
+            "JavaScript"
+        ],
+        "preferredSkills": [
+            "MongoDB",
+            "Git"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 1,
+        "salaryMin": 100000,
+        "salaryMax": 130000,
+        "salaryCurrency": "USD",
+        "description": "Join Deloitte as a Full Stack Developer. We are looking for a motivated candidate with strong expertise in Express, HTML, CSS, React, JavaScript. Preferred experience includes MongoDB, Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-019",
+        "company": "Infosys",
+        "title": "Data Scientist",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Gurugram",
+            "Bangalore",
+            "Pune"
+        ],
+        "requiredSkills": [
+            "React",
+            "Node",
+            "AWS",
+            "TypeScript"
+        ],
+        "preferredSkills": [
+            "PostgreSQL"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 60000,
+        "salaryMax": 80000,
+        "salaryCurrency": "GBP",
+        "description": "Join Infosys as a Data Scientist. We are looking for a motivated candidate with strong expertise in React, Node, AWS, TypeScript. Preferred experience includes PostgreSQL.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-020",
+        "company": "Google",
+        "title": "Backend Developer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Bangalore"
+        ],
+        "requiredSkills": [
+            "Node",
+            "Docker",
+            "MongoDB",
+            "TypeScript",
+            "React"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 8.0,
+        "minimumExperience": 0,
+        "salaryMin": 6,
+        "salaryMax": 11,
+        "salaryCurrency": "INR",
+        "description": "Join Google as a Backend Developer. We are looking for a motivated candidate with strong expertise in Node, Docker, MongoDB, TypeScript, React. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-021",
+        "company": "Infosys",
+        "title": "Cloud Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Pune"
+        ],
+        "requiredSkills": [
+            "Docker",
+            "AWS",
+            "Pandas",
+            "Python"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 8.0,
+        "minimumExperience": 5,
+        "salaryMin": 12,
+        "salaryMax": 20,
+        "salaryCurrency": "INR",
+        "description": "Join Infosys as a Cloud Engineer. We are looking for a motivated candidate with strong expertise in Docker, AWS, Pandas, Python. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-022",
+        "company": "Google",
+        "title": "Data Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Bangalore",
+            "Mumbai"
+        ],
+        "requiredSkills": [
+            "C#",
+            "Azure",
+            ".NET Core",
+            "ASP.NET",
+            "SQL Server"
+        ],
+        "preferredSkills": [
+            "Entity Framework",
+            "Git"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 60000,
+        "salaryMax": 100000,
+        "salaryCurrency": "EUR",
+        "description": "Join Google as a Data Engineer. We are looking for a motivated candidate with strong expertise in C#, Azure, .NET Core, ASP.NET, SQL Server. Preferred experience includes Entity Framework, Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-023",
+        "company": "EY",
+        "title": "Test Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Noida",
+            "Pune"
+        ],
+        "requiredSkills": [
+            "Django",
+            "FastAPI",
+            "Python"
+        ],
+        "preferredSkills": [
+            "Pandas"
+        ],
+        "minimumCGPA": 7.0,
+        "minimumExperience": 3,
+        "salaryMin": 100000,
+        "salaryMax": 130000,
+        "salaryCurrency": "EUR",
+        "description": "Join EY as a Test Engineer. We are looking for a motivated candidate with strong expertise in Django, FastAPI, Python. Preferred experience includes Pandas.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-024",
+        "company": "TCS",
+        "title": "Quality Assurance Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Pune",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Java",
+            "MySQL",
+            "Hibernate",
+            "Spring Boot"
+        ],
+        "preferredSkills": [
+            "Git"
+        ],
+        "minimumCGPA": 6.0,
+        "minimumExperience": 0,
+        "salaryMin": 120000,
+        "salaryMax": 140000,
+        "salaryCurrency": "EUR",
+        "description": "Join TCS as a Quality Assurance Engineer. We are looking for a motivated candidate with strong expertise in Java, MySQL, Hibernate, Spring Boot. Preferred experience includes Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-025",
+        "company": "Deloitte",
+        "title": "Senior software developer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Hyderabad",
+            "Gurugram",
+            "Chennai"
+        ],
+        "requiredSkills": [
+            "Java",
+            "MySQL",
+            "Spring Boot"
+        ],
+        "preferredSkills": [
+            "PostgreSQL"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 3,
+        "salaryMin": 15,
+        "salaryMax": 25,
+        "salaryCurrency": "INR",
+        "description": "Join Deloitte as a Senior software developer. We are looking for a motivated candidate with strong expertise in Java, MySQL, Spring Boot. Preferred experience includes PostgreSQL.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-026",
+        "company": "TCS",
+        "title": "Test Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Chennai",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Java",
+            "Spring",
+            "Hibernate",
+            "AWS",
+            "SQL"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 0,
+        "salaryMin": 12,
+        "salaryMax": 14,
+        "salaryCurrency": "INR",
+        "description": "Join TCS as a Test Engineer. We are looking for a motivated candidate with strong expertise in Java, Spring, Hibernate, AWS, SQL. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-027",
+        "company": "Wipro",
+        "title": "System Analyst",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Gurugram",
+            "Kochi"
+        ],
+        "requiredSkills": [
+            "Java",
+            "Docker",
+            "Spring",
+            "Hibernate",
+            "AWS"
+        ],
+        "preferredSkills": [
+            "PostgreSQL",
+            "SQL"
+        ],
+        "minimumCGPA": 6.0,
+        "minimumExperience": 0,
+        "salaryMin": 60000,
+        "salaryMax": 80000,
+        "salaryCurrency": "EUR",
+        "description": "Join Wipro as a System Analyst. We are looking for a motivated candidate with strong expertise in Java, Docker, Spring, Hibernate, AWS. Preferred experience includes PostgreSQL, SQL.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-028",
+        "company": "Deloitte",
+        "title": "Software Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Express",
+            "JavaScript",
+            "MongoDB"
+        ],
+        "preferredSkills": [
+            "CSS",
+            "TypeScript",
+            "Git"
+        ],
+        "minimumCGPA": 6.0,
+        "minimumExperience": 0,
+        "salaryMin": 80000,
+        "salaryMax": 90000,
+        "salaryCurrency": "USD",
+        "description": "Join Deloitte as a Software Engineer. We are looking for a motivated candidate with strong expertise in Express, JavaScript, MongoDB. Preferred experience includes CSS, TypeScript, Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-029",
+        "company": "Accenture",
+        "title": "Data Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Kochi",
+            "Mumbai",
+            "Chennai"
+        ],
+        "requiredSkills": [
+            "Docker",
+            "PostgreSQL",
+            "Node",
+            "TypeScript"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 80000,
+        "salaryMax": 110000,
+        "salaryCurrency": "EUR",
+        "description": "Join Accenture as a Data Engineer. We are looking for a motivated candidate with strong expertise in Docker, PostgreSQL, Node, TypeScript. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-030",
+        "company": "Infosys",
+        "title": "Software Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Mumbai",
+            "Hyderabad"
+        ],
+        "requiredSkills": [
+            "PostgreSQL",
+            "AWS",
+            "NestJS",
+            "TypeScript"
+        ],
+        "preferredSkills": [
+            "MongoDB",
+            "Git"
+        ],
+        "minimumCGPA": 6.0,
+        "minimumExperience": 0,
+        "salaryMin": 6,
+        "salaryMax": 8,
+        "salaryCurrency": "INR",
+        "description": "Join Infosys as a Software Engineer. We are looking for a motivated candidate with strong expertise in PostgreSQL, AWS, NestJS, TypeScript. Preferred experience includes MongoDB, Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-031",
+        "company": "Capgemini",
+        "title": "Data Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Pune",
+            "Gurugram"
+        ],
+        "requiredSkills": [
+            "Algorithms",
+            "STL",
+            "C++",
+            "System Design",
+            "Linux"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 8.0,
+        "minimumExperience": 1,
+        "salaryMin": 60000,
+        "salaryMax": 100000,
+        "salaryCurrency": "GBP",
+        "description": "Join Capgemini as a Data Engineer. We are looking for a motivated candidate with strong expertise in Algorithms, STL, C++, System Design, Linux. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-032",
+        "company": "Freshworks",
+        "title": "Software Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Pune"
+        ],
+        "requiredSkills": [
+            "Pandas",
+            "FastAPI",
+            "Python"
+        ],
+        "preferredSkills": [
+            "Docker",
+            "AWS"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 0,
+        "salaryMin": 120000,
+        "salaryMax": 160000,
+        "salaryCurrency": "EUR",
+        "description": "Join Freshworks as a Software Engineer. We are looking for a motivated candidate with strong expertise in Pandas, FastAPI, Python. Preferred experience includes Docker, AWS.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-033",
+        "company": "Deloitte",
+        "title": "Software Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Noida",
+            "Pune",
+            "Hyderabad"
+        ],
+        "requiredSkills": [
+            "Java",
+            "PostgreSQL",
+            "Hibernate",
+            "Spring Boot"
+        ],
+        "preferredSkills": [
+            "SQL",
+            "Spring"
+        ],
+        "minimumCGPA": 7.0,
+        "minimumExperience": 0,
+        "salaryMin": 80000,
+        "salaryMax": 100000,
+        "salaryCurrency": "GBP",
+        "description": "Join Deloitte as a Software Engineer. We are looking for a motivated candidate with strong expertise in Java, PostgreSQL, Hibernate, Spring Boot. Preferred experience includes SQL, Spring.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-034",
+        "company": "Freshworks",
+        "title": "Software Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Gurugram",
+            "Chennai",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Java",
+            "MySQL",
+            "SQL"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Spring"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 0,
+        "salaryMin": 6,
+        "salaryMax": 8,
+        "salaryCurrency": "INR",
+        "description": "Join Freshworks as a Software Engineer. We are looking for a motivated candidate with strong expertise in Java, MySQL, SQL. Preferred experience includes Git, Spring.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-035",
+        "company": "Cognizant",
+        "title": "Frontend Developer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Chennai",
+            "Bangalore",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "AWS",
+            "PostgreSQL",
+            "React",
+            "TypeScript"
+        ],
+        "preferredSkills": [
+            "MongoDB",
+            "Node"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 70000,
+        "salaryMax": 110000,
+        "salaryCurrency": "EUR",
+        "description": "Join Cognizant as a Frontend Developer. We are looking for a motivated candidate with strong expertise in AWS, PostgreSQL, React, TypeScript. Preferred experience includes MongoDB, Node.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-036",
+        "company": "Wipro",
+        "title": "Data Scientist",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Mumbai"
+        ],
+        "requiredSkills": [
+            "CSS",
+            "React",
+            "JavaScript"
+        ],
+        "preferredSkills": [
+            "TypeScript"
+        ],
+        "minimumCGPA": 7.0,
+        "minimumExperience": 3,
+        "salaryMin": 120000,
+        "salaryMax": 160000,
+        "salaryCurrency": "EUR",
+        "description": "Join Wipro as a Data Scientist. We are looking for a motivated candidate with strong expertise in CSS, React, JavaScript. Preferred experience includes TypeScript.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-037",
+        "company": "Zoho",
+        "title": "Data Scientist",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Bangalore",
+            "Hyderabad",
+            "Gurugram"
+        ],
+        "requiredSkills": [
+            "Node",
+            "MongoDB",
+            "TypeScript"
+        ],
+        "preferredSkills": [
+            "React",
+            "PostgreSQL"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 0,
+        "salaryMin": 80000,
+        "salaryMax": 100000,
+        "salaryCurrency": "USD",
+        "description": "Join Zoho as a Data Scientist. We are looking for a motivated candidate with strong expertise in Node, MongoDB, TypeScript. Preferred experience includes React, PostgreSQL.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-038",
+        "company": "Accenture",
+        "title": "DevOps Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Mumbai",
+            "Chennai",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Linux",
+            "Algorithms",
+            "C++"
+        ],
+        "preferredSkills": [
+            "System Design"
+        ],
+        "minimumCGPA": 8.0,
+        "minimumExperience": 0,
+        "salaryMin": 120000,
+        "salaryMax": 140000,
+        "salaryCurrency": "EUR",
+        "description": "Join Accenture as a DevOps Engineer. We are looking for a motivated candidate with strong expertise in Linux, Algorithms, C++. Preferred experience includes System Design.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-039",
+        "company": "IBM",
+        "title": "Cloud Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Pune",
+            "Hyderabad",
+            "Chennai"
+        ],
+        "requiredSkills": [
+            "CSS",
+            "Node",
+            "JavaScript",
+            "TypeScript"
+        ],
+        "preferredSkills": [
+            "Docker",
+            "Express"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 2,
+        "salaryMin": 6,
+        "salaryMax": 11,
+        "salaryCurrency": "INR",
+        "description": "Join IBM as a Cloud Engineer. We are looking for a motivated candidate with strong expertise in CSS, Node, JavaScript, TypeScript. Preferred experience includes Docker, Express.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-040",
+        "company": "Accenture",
+        "title": "System Analyst",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Chennai"
+        ],
+        "requiredSkills": [
+            "PostgreSQL",
+            "AWS",
+            "Angular",
+            "TypeScript"
+        ],
+        "preferredSkills": [
+            "React",
+            "Node"
+        ],
+        "minimumCGPA": 7.0,
+        "minimumExperience": 0,
+        "salaryMin": 100000,
+        "salaryMax": 120000,
+        "salaryCurrency": "GBP",
+        "description": "Join Accenture as a System Analyst. We are looking for a motivated candidate with strong expertise in PostgreSQL, AWS, Angular, TypeScript. Preferred experience includes React, Node.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-041",
+        "company": "Accenture",
+        "title": "Data Scientist",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Mumbai"
+        ],
+        "requiredSkills": [
+            "Node",
+            "MongoDB",
+            "PostgreSQL",
+            "TypeScript",
+            "React"
+        ],
+        "preferredSkills": [
+            "NestJS"
+        ],
+        "minimumCGPA": 6.0,
+        "minimumExperience": 0,
+        "salaryMin": 70000,
+        "salaryMax": 90000,
+        "salaryCurrency": "GBP",
+        "description": "Join Accenture as a Data Scientist. We are looking for a motivated candidate with strong expertise in Node, MongoDB, PostgreSQL, TypeScript, React. Preferred experience includes NestJS.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-042",
+        "company": "Oracle",
+        "title": "Test Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Noida",
+            "Mumbai",
+            "Pune"
+        ],
+        "requiredSkills": [
+            "Java",
+            "MySQL",
+            "Hibernate",
+            "AWS",
+            "SQL"
+        ],
+        "preferredSkills": [
+            "Git",
+            "PostgreSQL"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 3,
+        "salaryMin": 80000,
+        "salaryMax": 100000,
+        "salaryCurrency": "EUR",
+        "description": "Join Oracle as a Test Engineer. We are looking for a motivated candidate with strong expertise in Java, MySQL, Hibernate, AWS, SQL. Preferred experience includes Git, PostgreSQL.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-043",
+        "company": "Microsoft",
+        "title": "Backend Developer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Kochi",
+            "Pune",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Java",
+            "Docker",
+            "PostgreSQL",
+            "Hibernate"
+        ],
+        "preferredSkills": [
+            "Git",
+            "Docker"
+        ],
+        "minimumCGPA": 6.0,
+        "minimumExperience": 0,
+        "salaryMin": 120000,
+        "salaryMax": 140000,
+        "salaryCurrency": "USD",
+        "description": "Join Microsoft as a Backend Developer. We are looking for a motivated candidate with strong expertise in Java, Docker, PostgreSQL, Hibernate. Preferred experience includes Git, Docker.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-044",
+        "company": "Google",
+        "title": "DevOps Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Mumbai",
+            "Gurugram",
+            "Hyderabad"
+        ],
+        "requiredSkills": [
+            "Entity Framework",
+            "C#",
+            ".NET Core"
+        ],
+        "preferredSkills": [
+            "ASP.NET"
+        ],
+        "minimumCGPA": 8.0,
+        "minimumExperience": 0,
+        "salaryMin": 70000,
+        "salaryMax": 100000,
+        "salaryCurrency": "USD",
+        "description": "Join Google as a DevOps Engineer. We are looking for a motivated candidate with strong expertise in Entity Framework, C#, .NET Core. Preferred experience includes ASP.NET.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-045",
+        "company": "Freshworks",
+        "title": "DevOps Engineer",
+        "employmentType": "FULL_TIME",
+        "locations": [
+            "Gurugram",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Express",
+            "Docker",
+            "Node",
+            "TypeScript",
+            "JavaScript"
+        ],
+        "preferredSkills": [
+            "CSS",
+            "Git"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 3,
+        "salaryMin": 100000,
+        "salaryMax": 130000,
+        "salaryCurrency": "EUR",
+        "description": "Join Freshworks as a DevOps Engineer. We are looking for a motivated candidate with strong expertise in Express, Docker, Node, TypeScript, JavaScript. Preferred experience includes CSS, Git.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-046",
+        "company": "IBM",
+        "title": "Software Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Mumbai",
+            "Gurugram"
+        ],
+        "requiredSkills": [
+            "Express",
+            "Docker",
+            "MongoDB",
+            "CSS",
+            "JavaScript"
+        ],
+        "preferredSkills": [
+            "TypeScript"
+        ],
+        "minimumCGPA": 7.0,
+        "minimumExperience": 0,
+        "salaryMin": 60000,
+        "salaryMax": 70000,
+        "salaryCurrency": "GBP",
+        "description": "Join IBM as a Software Engineer. We are looking for a motivated candidate with strong expertise in Express, Docker, MongoDB, CSS, JavaScript. Preferred experience includes TypeScript.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-047",
+        "company": "Wipro",
+        "title": "Data Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Chennai"
+        ],
+        "requiredSkills": [
+            "Pandas",
+            "Flask",
+            "FastAPI",
+            "Python"
+        ],
+        "preferredSkills": [
+            "SQL"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 60000,
+        "salaryMax": 70000,
+        "salaryCurrency": "EUR",
+        "description": "Join Wipro as a Data Engineer. We are looking for a motivated candidate with strong expertise in Pandas, Flask, FastAPI, Python. Preferred experience includes SQL.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-048",
+        "company": "Freshworks",
+        "title": "Quality Assurance Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Mumbai",
+            "Bangalore"
+        ],
+        "requiredSkills": [
+            "System Design",
+            "Linux",
+            "C++"
+        ],
+        "preferredSkills": [
+            "Algorithms"
+        ],
+        "minimumCGPA": 6.5,
+        "minimumExperience": 0,
+        "salaryMin": 70000,
+        "salaryMax": 110000,
+        "salaryCurrency": "USD",
+        "description": "Join Freshworks as a Quality Assurance Engineer. We are looking for a motivated candidate with strong expertise in System Design, Linux, C++. Preferred experience includes Algorithms.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-049",
+        "company": "Infosys",
+        "title": "Senior software developer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Gurugram",
+            "Noida"
+        ],
+        "requiredSkills": [
+            "System Design",
+            "Algorithms",
+            "C++"
+        ],
+        "preferredSkills": [
+            "Linux"
+        ],
+        "minimumCGPA": 7.0,
+        "minimumExperience": 0,
+        "salaryMin": 10,
+        "salaryMax": 12,
+        "salaryCurrency": "INR",
+        "description": "Join Infosys as a Senior software developer. We are looking for a motivated candidate with strong expertise in System Design, Algorithms, C++. Preferred experience includes Linux.",
+        "status": "ACTIVE"
+    },
+    {
+        "externalId": "STATIC-050",
+        "company": "EY",
+        "title": "Quality Assurance Engineer",
+        "employmentType": "INTERNSHIP",
+        "locations": [
+            "Noida"
+        ],
+        "requiredSkills": [
+            "Express",
+            "HTML",
+            "JavaScript",
+            "CSS"
+        ],
+        "preferredSkills": [
+            "TypeScript",
+            "Git"
+        ],
+        "minimumCGPA": 7.5,
+        "minimumExperience": 0,
+        "salaryMin": 80000,
+        "salaryMax": 90000,
+        "salaryCurrency": "USD",
+        "description": "Join EY as a Quality Assurance Engineer. We are looking for a motivated candidate with strong expertise in Express, HTML, JavaScript, CSS. Preferred experience includes TypeScript, Git.",
+        "status": "ACTIVE"
+    }
+]
