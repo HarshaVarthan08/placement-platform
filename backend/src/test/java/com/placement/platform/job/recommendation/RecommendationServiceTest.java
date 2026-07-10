@@ -7,6 +7,7 @@ import com.placement.platform.job.intelligence.CandidateIntelligenceProfile;
 import com.placement.platform.job.intelligence.CandidateIntelligenceProfileBuilder;
 import com.placement.platform.job.matching.*;
 import com.placement.platform.job.repository.JobRepository;
+import com.placement.platform.repository.ResumeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,6 +36,8 @@ public class RecommendationServiceTest {
     private JobMatchingEngine matchingEngine;
     @Mock
     private JobRecommendationRepository jobRecommendationRepository;
+    @Mock
+    private ResumeRepository resumeRepository;
 
     private RecommendationExplanationBuilder explanationBuilder;
     private RecommendationBuilder recommendationBuilder;
@@ -54,7 +57,8 @@ public class RecommendationServiceTest {
                 jobRepository,
                 matchingEngine,
                 recommendationBuilder,
-                jobRecommendationRepository
+                jobRecommendationRepository,
+                resumeRepository
         );
 
         user = new User();
@@ -119,7 +123,11 @@ public class RecommendationServiceTest {
         existing.setJobId(10L);
         existing.setMatchScore(90); // will be updated to 95
 
-        when(jobRecommendationRepository.findByUserId(1L)).thenReturn(List.of(existing));
+        when(jobRecommendationRepository.findByUserIdAndJobIdOrderByRecommendationVersionDesc(1L, 10L))
+                .thenReturn(List.of(existing));
+        when(jobRecommendationRepository.findByUserIdAndJobIdOrderByRecommendationVersionDesc(1L, 11L))
+                .thenReturn(List.of());
+        when(resumeRepository.findByUserId(1L)).thenReturn(Optional.empty());
 
         // Mock saving
         when(jobRecommendationRepository.saveAll(any(List.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -133,8 +141,9 @@ public class RecommendationServiceTest {
         // Check update of existing recommendation for job1
         JobRecommendation rec1 = savedRecs.stream().filter(r -> r.getJobId() == 10L).findFirst().orElse(null);
         assertNotNull(rec1);
-        assertEquals(200L, rec1.getId()); // must preserve ID
-        assertEquals(95, rec1.getMatchScore()); // updated
+        assertNull(rec1.getId()); // new row created for history
+        assertEquals(2, rec1.getRecommendationVersion()); // version incremented
+        assertEquals(95, rec1.getMatchScore());
         assertEquals(RecommendationLevel.EXCELLENT, rec1.getRecommendationLevel());
 
         // Check creation of new recommendation for job2
@@ -143,11 +152,6 @@ public class RecommendationServiceTest {
         assertNull(rec2.getId()); // new
         assertEquals(78, rec2.getMatchScore());
         assertEquals(RecommendationLevel.STRONG, rec2.getRecommendationLevel());
-
-        // Verify deletion of inactive jobs was called (jobIds: 10, 11 are active, so any others are deleted)
-        verify(jobRecommendationRepository).deleteByUserIdAndJobIdNotIn(eq(1L), argThat(list ->
-                list.contains(10L) && list.contains(11L) && list.size() == 2
-        ));
     }
 
     @Test
@@ -164,7 +168,13 @@ public class RecommendationServiceTest {
         rec2.setRecommendationLevel(RecommendationLevel.STRONG);
         rec2.setJobId(11L);
 
-        when(jobRecommendationRepository.findByUserId(1L)).thenReturn(List.of(rec1, rec2));
+        rec1.setGenerationId("GEN1");
+        rec1.setGeneratedAt(LocalDateTime.now());
+        rec2.setGenerationId("GEN1");
+        rec2.setGeneratedAt(LocalDateTime.now());
+
+        when(jobRecommendationRepository.findLatestGenerationId(1L)).thenReturn(Optional.of("GEN1"));
+        when(jobRecommendationRepository.findByUserIdAndGenerationId(1L, "GEN1")).thenReturn(List.of(rec1, rec2));
         when(jobRepository.findById(10L)).thenReturn(Optional.of(job1)); // job1 is top recommended (highest score 95)
 
         RecommendationSummaryDto summary = recommendationService.getRecommendationSummary(user);

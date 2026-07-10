@@ -1,9 +1,7 @@
 package com.placement.platform.job.dto;
 
 import com.placement.platform.job.matching.ScoreBreakdown;
-import com.placement.platform.job.recommendation.RecommendationAction;
-import com.placement.platform.job.recommendation.RecommendationLevel;
-import com.placement.platform.job.recommendation.RecommendationPriority;
+import com.placement.platform.job.recommendation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,143 +26,150 @@ public class JobRecommendationResponseDto {
     private LocalDateTime updatedAt;
     private JobResponseDto job;
 
+    // Lifecycle states
+    private RecommendationStatus recommendationStatus;
+    private LocalDateTime viewedAt;
+    private LocalDateTime savedAt;
+    private LocalDateTime appliedAt;
+    private LocalDateTime archivedAt;
+    private LocalDateTime hiddenAt;
+    private Integer viewCount;
+    private Integer recommendationVersion;
+    private String generationId;
+    private RecommendationGenerationReason generationReason;
+    private LocalDateTime lastRefreshedAt;
+    private Boolean hidden;
+
+    // Snapshot fields
+    private Integer atsScore;
+    private Integer readinessScore;
+    private String resumeVersion;
+
+    // Application Tracking
+    private ApplicationStatus applicationStatus;
+    private String applicationUrl;
+    private String applicationReference;
+    private String applicationNotes;
+
+    // Feedback
+    private RecommendationFeedbackType feedbackType;
+    private String feedbackNotes;
+
     public JobRecommendationResponseDto() {
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 
-    public Long getUserId() {
-        return userId;
-    }
+    public Integer getMatchScore() { return matchScore; }
+    public void setMatchScore(Integer matchScore) { this.matchScore = matchScore; }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+    public Integer getConfidenceScore() { return confidenceScore; }
+    public void setConfidenceScore(Integer confidenceScore) { this.confidenceScore = confidenceScore; }
 
-    public Integer getMatchScore() {
-        return matchScore;
-    }
+    public RecommendationLevel getRecommendationLevel() { return recommendationLevel; }
+    public void setRecommendationLevel(RecommendationLevel recommendationLevel) { this.recommendationLevel = recommendationLevel; }
 
-    public void setMatchScore(Integer matchScore) {
-        this.matchScore = matchScore;
-    }
+    public RecommendationPriority getRecommendationPriority() { return recommendationPriority; }
+    public void setRecommendationPriority(RecommendationPriority recommendationPriority) { this.recommendationPriority = recommendationPriority; }
 
-    public Integer getConfidenceScore() {
-        return confidenceScore;
-    }
+    public RecommendationAction getRecommendationAction() { return recommendationAction; }
+    public void setRecommendationAction(RecommendationAction recommendationAction) { this.recommendationAction = recommendationAction; }
 
-    public void setConfidenceScore(Integer confidenceScore) {
-        this.confidenceScore = confidenceScore;
-    }
+    public List<String> getMatchedSkills() { return matchedSkills; }
+    public void setMatchedSkills(List<String> matchedSkills) { this.matchedSkills = matchedSkills; }
 
-    public RecommendationLevel getRecommendationLevel() {
-        return recommendationLevel;
-    }
+    public List<String> getMissingSkills() { return missingSkills; }
+    public void setMissingSkills(List<String> missingSkills) { this.missingSkills = missingSkills; }
 
-    public void setRecommendationLevel(RecommendationLevel recommendationLevel) {
-        this.recommendationLevel = recommendationLevel;
-    }
+    public ScoreBreakdown getScoreBreakdown() { return scoreBreakdown; }
+    public void setScoreBreakdown(ScoreBreakdown scoreBreakdown) { this.scoreBreakdown = scoreBreakdown; }
 
-    public RecommendationPriority getRecommendationPriority() {
-        return recommendationPriority;
-    }
+    public String getRecommendationReason() { return recommendationReason; }
+    public void setRecommendationReason(String recommendationReason) { this.recommendationReason = recommendationReason; }
 
-    public void setRecommendationPriority(RecommendationPriority recommendationPriority) {
-        this.recommendationPriority = recommendationPriority;
-    }
+    public Integer getMatchedSkillCount() { return matchedSkillCount; }
+    public void setMatchedSkillCount(Integer matchedSkillCount) { this.matchedSkillCount = matchedSkillCount; }
 
-    public RecommendationAction getRecommendationAction() {
-        return recommendationAction;
-    }
+    public Integer getTotalRequiredSkills() { return totalRequiredSkills; }
+    public void setTotalRequiredSkills(Integer totalRequiredSkills) { this.totalRequiredSkills = totalRequiredSkills; }
 
-    public void setRecommendationAction(RecommendationAction recommendationAction) {
-        this.recommendationAction = recommendationAction;
-    }
+    public Double getSkillMatchPercentage() { return skillMatchPercentage; }
+    public void setSkillMatchPercentage(Double skillMatchPercentage) { this.skillMatchPercentage = skillMatchPercentage; }
 
-    public List<String> getMatchedSkills() {
-        return matchedSkills;
-    }
+    public LocalDateTime getGeneratedAt() { return generatedAt; }
+    public void setGeneratedAt(LocalDateTime generatedAt) { this.generatedAt = generatedAt; }
 
-    public void setMatchedSkills(List<String> matchedSkills) {
-        this.matchedSkills = matchedSkills;
-    }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 
-    public List<String> getMissingSkills() {
-        return missingSkills;
-    }
+    public JobResponseDto getJob() { return job; }
+    public void setJob(JobResponseDto job) { this.job = job; }
 
-    public void setMissingSkills(List<String> missingSkills) {
-        this.missingSkills = missingSkills;
-    }
+    public RecommendationStatus getRecommendationStatus() { return recommendationStatus; }
+    public void setRecommendationStatus(RecommendationStatus recommendationStatus) { this.recommendationStatus = recommendationStatus; }
 
-    public ScoreBreakdown getScoreBreakdown() {
-        return scoreBreakdown;
-    }
+    public LocalDateTime getViewedAt() { return viewedAt; }
+    public void setViewedAt(LocalDateTime viewedAt) { this.viewedAt = viewedAt; }
 
-    public void setScoreBreakdown(ScoreBreakdown scoreBreakdown) {
-        this.scoreBreakdown = scoreBreakdown;
-    }
+    public LocalDateTime getSavedAt() { return savedAt; }
+    public void setSavedAt(LocalDateTime savedAt) { this.savedAt = savedAt; }
 
-    public String getRecommendationReason() {
-        return recommendationReason;
-    }
+    public LocalDateTime getAppliedAt() { return appliedAt; }
+    public void setAppliedAt(LocalDateTime appliedAt) { this.appliedAt = appliedAt; }
 
-    public void setRecommendationReason(String recommendationReason) {
-        this.recommendationReason = recommendationReason;
-    }
+    public LocalDateTime getArchivedAt() { return archivedAt; }
+    public void setArchivedAt(LocalDateTime archivedAt) { this.archivedAt = archivedAt; }
 
-    public Integer getMatchedSkillCount() {
-        return matchedSkillCount;
-    }
+    public LocalDateTime getHiddenAt() { return hiddenAt; }
+    public void setHiddenAt(LocalDateTime hiddenAt) { this.hiddenAt = hiddenAt; }
 
-    public void setMatchedSkillCount(Integer matchedSkillCount) {
-        this.matchedSkillCount = matchedSkillCount;
-    }
+    public Integer getViewCount() { return viewCount; }
+    public void setViewCount(Integer viewCount) { this.viewCount = viewCount; }
 
-    public Integer getTotalRequiredSkills() {
-        return totalRequiredSkills;
-    }
+    public Integer getRecommendationVersion() { return recommendationVersion; }
+    public void setRecommendationVersion(Integer recommendationVersion) { this.recommendationVersion = recommendationVersion; }
 
-    public void setTotalRequiredSkills(Integer totalRequiredSkills) {
-        this.totalRequiredSkills = totalRequiredSkills;
-    }
+    public String getGenerationId() { return generationId; }
+    public void setGenerationId(String generationId) { this.generationId = generationId; }
 
-    public Double getSkillMatchPercentage() {
-        return skillMatchPercentage;
-    }
+    public RecommendationGenerationReason getGenerationReason() { return generationReason; }
+    public void setGenerationReason(RecommendationGenerationReason generationReason) { this.generationReason = generationReason; }
 
-    public void setSkillMatchPercentage(Double skillMatchPercentage) {
-        this.skillMatchPercentage = skillMatchPercentage;
-    }
+    public LocalDateTime getLastRefreshedAt() { return lastRefreshedAt; }
+    public void setLastRefreshedAt(LocalDateTime lastRefreshedAt) { this.lastRefreshedAt = lastRefreshedAt; }
 
-    public LocalDateTime getGeneratedAt() {
-        return generatedAt;
-    }
+    public Boolean getHidden() { return hidden; }
+    public void setHidden(Boolean hidden) { this.hidden = hidden; }
 
-    public void setGeneratedAt(LocalDateTime generatedAt) {
-        this.generatedAt = generatedAt;
-    }
+    public Integer getAtsScore() { return atsScore; }
+    public void setAtsScore(Integer atsScore) { this.atsScore = atsScore; }
 
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
+    public Integer getReadinessScore() { return readinessScore; }
+    public void setReadinessScore(Integer readinessScore) { this.readinessScore = readinessScore; }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+    public String getResumeVersion() { return resumeVersion; }
+    public void setResumeVersion(String resumeVersion) { this.resumeVersion = resumeVersion; }
 
-    public JobResponseDto getJob() {
-        return job;
-    }
+    public ApplicationStatus getApplicationStatus() { return applicationStatus; }
+    public void setApplicationStatus(ApplicationStatus applicationStatus) { this.applicationStatus = applicationStatus; }
 
-    public void setJob(JobResponseDto job) {
-        this.job = job;
-    }
+    public String getApplicationUrl() { return applicationUrl; }
+    public void setApplicationUrl(String applicationUrl) { this.applicationUrl = applicationUrl; }
+
+    public String getApplicationReference() { return applicationReference; }
+    public void setApplicationReference(String applicationReference) { this.applicationReference = applicationReference; }
+
+    public String getApplicationNotes() { return applicationNotes; }
+    public void setApplicationNotes(String applicationNotes) { this.applicationNotes = applicationNotes; }
+
+    public RecommendationFeedbackType getFeedbackType() { return feedbackType; }
+    public void setFeedbackType(RecommendationFeedbackType feedbackType) { this.feedbackType = feedbackType; }
+
+    public String getFeedbackNotes() { return feedbackNotes; }
+    public void setFeedbackNotes(String feedbackNotes) { this.feedbackNotes = feedbackNotes; }
 }

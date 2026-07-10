@@ -9,11 +9,13 @@ import com.placement.platform.job.intelligence.CandidateIntelligenceProfileBuild
 import com.placement.platform.job.matching.JobMatchingEngine;
 import com.placement.platform.job.matching.RecommendationResult;
 import com.placement.platform.job.repository.JobRepository;
+import com.placement.platform.repository.ResumeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,24 +27,33 @@ public class RecommendationServiceImpl implements RecommendationService {
     private final JobMatchingEngine matchingEngine;
     private final RecommendationBuilder recommendationBuilder;
     private final JobRecommendationRepository jobRecommendationRepository;
+    private final ResumeRepository resumeRepository;
 
     public RecommendationServiceImpl(
             CandidateIntelligenceProfileBuilder profileBuilder,
             JobRepository jobRepository,
             JobMatchingEngine matchingEngine,
             RecommendationBuilder recommendationBuilder,
-            JobRecommendationRepository jobRecommendationRepository
+            JobRecommendationRepository jobRecommendationRepository,
+            ResumeRepository resumeRepository
     ) {
         this.profileBuilder = profileBuilder;
         this.jobRepository = jobRepository;
         this.matchingEngine = matchingEngine;
         this.recommendationBuilder = recommendationBuilder;
         this.jobRecommendationRepository = jobRecommendationRepository;
+        this.resumeRepository = resumeRepository;
     }
 
     @Override
     @Transactional
     public List<JobRecommendation> generateRecommendations(User user) {
+        return generateRecommendations(user, RecommendationGenerationReason.MANUAL);
+    }
+
+    @Override
+    @Transactional
+    public List<JobRecommendation> generateRecommendations(User user, RecommendationGenerationReason reason) {
         Long userId = user.getId();
 
         // 1. Build Candidate Profile once
@@ -51,61 +62,118 @@ public class RecommendationServiceImpl implements RecommendationService {
         // 2. Load active jobs once
         List<Job> activeJobs = jobRepository.findActiveJobs();
         if (activeJobs.isEmpty()) {
-            jobRecommendationRepository.deleteByUserId(userId);
             return List.of();
         }
 
-        // 3. Perform all matching in memory (stateless matching engine)
+        // 3. Perform all matching in memory
         List<RecommendationResult> matchResults = matchingEngine.evaluateJobs(profile, activeJobs);
 
-        // 4. Fetch existing recommendations for this user to avoid duplicates and perform clean updates
-        List<JobRecommendation> existingRecommendations = jobRecommendationRepository.findByUserId(userId);
-        Map<Long, JobRecommendation> existingMap = existingRecommendations.stream()
-                .collect(Collectors.toMap(JobRecommendation::getJobId, r -> r));
+        // 4. Set up generation metadata
+        String generationId = UUID.randomUUID().toString();
+        LocalDateTime now = LocalDateTime.now();
+
+        // 5. Gather snapshots
+        Integer atsScoreSnapshot = profile.resumeATSScore();
+        Integer readinessScoreSnapshot = profile.placementReadinessScore();
+        String resumeVersionSnapshot = resumeRepository.findByUserId(userId)
+                .map(r -> r.getId().toString())
+                .orElse("NO_RESUME");
 
         List<JobRecommendation> toSave = new ArrayList<>();
-        Set<Long> activeJobIds = new HashSet<>();
 
         for (RecommendationResult result : matchResults) {
             Long jobId = result.job().getId();
-            activeJobIds.add(jobId);
 
-            JobRecommendation recommendation = existingMap.get(jobId);
-            if (recommendation == null) {
-                // Create
-                recommendation = recommendationBuilder.build(result, userId);
-            } else {
-                // Update existing
-                JobRecommendation newRec = recommendationBuilder.build(result, userId);
-                recommendation.setMatchScore(newRec.getMatchScore());
-                recommendation.setConfidenceScore(newRec.getConfidenceScore());
-                recommendation.setRecommendationLevel(newRec.getRecommendationLevel());
-                recommendation.setRecommendationPriority(newRec.getRecommendationPriority());
-                recommendation.setRecommendationAction(newRec.getRecommendationAction());
-                recommendation.setMatchedSkills(newRec.getMatchedSkills());
-                recommendation.setMissingSkills(newRec.getMissingSkills());
-                recommendation.setScoreBreakdown(newRec.getScoreBreakdown());
-                recommendation.setRecommendationReason(newRec.getRecommendationReason());
-                recommendation.setMatchedSkillCount(newRec.getMatchedSkillCount());
-                recommendation.setTotalRequiredSkills(newRec.getTotalRequiredSkills());
-                recommendation.setSkillMatchPercentage(newRec.getSkillMatchPercentage());
+            // Find the latest previous recommendation for this user and job to carry over state and increment version
+            List<JobRecommendation> previousRecs = jobRecommendationRepository
+                    .findByUserIdAndJobIdOrderByRecommendationVersionDesc(userId, jobId);
+
+            int version = 1;
+            RecommendationStatus status = RecommendationStatus.NEW;
+            LocalDateTime viewedAt = null;
+            LocalDateTime savedAt = null;
+            LocalDateTime appliedAt = null;
+            LocalDateTime archivedAt = null;
+            LocalDateTime hiddenAt = null;
+            int viewCount = 0;
+            boolean isHidden = false;
+
+            // Application tracking states
+            ApplicationStatus appStatus = null;
+            String appUrl = null;
+            String appRef = null;
+            String appNotes = null;
+
+            // Feedback states
+            RecommendationFeedbackType feedbackType = null;
+            String feedbackNotes = null;
+
+            if (!previousRecs.isEmpty()) {
+                JobRecommendation latestPrev = previousRecs.get(0);
+                version = latestPrev.getRecommendationVersion() + 1;
+                status = latestPrev.getRecommendationStatus();
+                viewedAt = latestPrev.getViewedAt();
+                savedAt = latestPrev.getSavedAt();
+                appliedAt = latestPrev.getAppliedAt();
+                archivedAt = latestPrev.getArchivedAt();
+                hiddenAt = latestPrev.getHiddenAt();
+                viewCount = latestPrev.getViewCount();
+                isHidden = latestPrev.getHidden();
+
+                appStatus = latestPrev.getApplicationStatus();
+                appUrl = latestPrev.getApplicationUrl();
+                appRef = latestPrev.getApplicationReference();
+                appNotes = latestPrev.getApplicationNotes();
+
+                feedbackType = latestPrev.getFeedbackType();
+                feedbackNotes = latestPrev.getFeedbackNotes();
             }
+
+            // Build recommendation
+            JobRecommendation recommendation = recommendationBuilder.build(result, userId);
+            recommendation.setRecommendationStatus(status);
+            recommendation.setRecommendationVersion(version);
+            recommendation.setGenerationId(generationId);
+            recommendation.setGenerationReason(reason);
+            recommendation.setViewedAt(viewedAt);
+            recommendation.setSavedAt(savedAt);
+            recommendation.setAppliedAt(appliedAt);
+            recommendation.setArchivedAt(archivedAt);
+            recommendation.setHiddenAt(hiddenAt);
+            recommendation.setViewCount(viewCount);
+            recommendation.setLastRefreshedAt(now);
+            recommendation.setHidden(isHidden);
+
+            // Set immutable snapshots
+            recommendation.setAtsScore(atsScoreSnapshot);
+            recommendation.setReadinessScore(readinessScoreSnapshot);
+            recommendation.setResumeVersion(resumeVersionSnapshot);
+
+            // Set application details
+            recommendation.setApplicationStatus(appStatus);
+            recommendation.setApplicationUrl(appUrl);
+            recommendation.setApplicationReference(appRef);
+            recommendation.setApplicationNotes(appNotes);
+
+            // Set feedback details
+            recommendation.setFeedbackType(feedbackType);
+            recommendation.setFeedbackNotes(feedbackNotes);
+
             toSave.add(recommendation);
         }
 
-        // 5. Bulk persist recommendations
-        List<JobRecommendation> saved = jobRecommendationRepository.saveAll(toSave);
-
-        // 6. Delete recommendations for jobs that are no longer active/removed
-        jobRecommendationRepository.deleteByUserIdAndJobIdNotIn(userId, new ArrayList<>(activeJobIds));
-
-        return saved;
+        // 6. Bulk persist new generation (no deletions of older generations)
+        return jobRecommendationRepository.saveAll(toSave);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Page<JobRecommendation> getRecommendations(User user, Pageable pageable) {
-        return jobRecommendationRepository.findByUserId(user.getId(), pageable);
+        Optional<String> latestGenOpt = jobRecommendationRepository.findLatestGenerationId(user.getId());
+        if (latestGenOpt.isEmpty()) {
+            return Page.empty();
+        }
+        return jobRecommendationRepository.findByUserIdAndGenerationIdAndHiddenFalse(user.getId(), latestGenOpt.get(), pageable);
     }
 
     @Override
@@ -118,7 +186,12 @@ public class RecommendationServiceImpl implements RecommendationService {
     @Override
     @Transactional(readOnly = true)
     public RecommendationSummaryDto getRecommendationSummary(User user) {
-        List<JobRecommendation> recs = jobRecommendationRepository.findByUserId(user.getId());
+        Optional<String> latestGenOpt = jobRecommendationRepository.findLatestGenerationId(user.getId());
+        if (latestGenOpt.isEmpty()) {
+            return new RecommendationSummaryDto(0, 0, 0, 0.0, 0.0, "N/A");
+        }
+
+        List<JobRecommendation> recs = jobRecommendationRepository.findByUserIdAndGenerationId(user.getId(), latestGenOpt.get());
         if (recs.isEmpty()) {
             return new RecommendationSummaryDto(0, 0, 0, 0.0, 0.0, "N/A");
         }
@@ -130,7 +203,7 @@ public class RecommendationServiceImpl implements RecommendationService {
         double avgScore = recs.stream().mapToInt(JobRecommendation::getMatchScore).average().orElse(0.0);
         double avgConf = recs.stream().mapToInt(JobRecommendation::getConfidenceScore).average().orElse(0.0);
 
-        // Find top recommended company
+        // Find top recommended company from active jobs
         String topCompany = "N/A";
         JobRecommendation topRec = recs.stream()
                 .max(Comparator.comparingInt(JobRecommendation::getMatchScore))

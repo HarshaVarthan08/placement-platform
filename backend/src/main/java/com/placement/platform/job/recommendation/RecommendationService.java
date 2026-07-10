@@ -11,6 +11,8 @@ public interface RecommendationService {
 
     List<JobRecommendation> generateRecommendations(User user);
 
+    List<JobRecommendation> generateRecommendations(User user, RecommendationGenerationReason reason);
+
     Page<JobRecommendation> getRecommendations(User user, Pageable pageable);
 
     JobRecommendation getRecommendationDetails(Long id);
