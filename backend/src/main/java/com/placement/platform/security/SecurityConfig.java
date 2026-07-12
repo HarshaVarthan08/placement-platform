@@ -40,9 +40,12 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/register", "/api/auth/login", "/api/health").permitAll()
+                .requestMatchers("/api/premium/catalog").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/jobs/sync").hasRole("ADMIN")
                 .requestMatchers("/api/jobs/**").authenticated()
                 .requestMatchers("/api/career/**").authenticated()
+                .requestMatchers("/api/premium/**").authenticated()
+                .requestMatchers("/api/subscription/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session
