@@ -5,6 +5,10 @@ import com.placement.platform.job.entity.Job;
 import com.placement.platform.job.entity.JobStatus;
 import com.placement.platform.job.repository.JobRepository;
 import com.placement.platform.job.service.JobSynchronizationManager;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/jobs")
+@Tag(name = "Jobs", description = "Endpoints for retrieving active job details")
 public class JobController {
 
     private final JobSynchronizationManager syncManager;
@@ -24,12 +29,19 @@ public class JobController {
     }
 
     @PostMapping("/sync")
+    @Operation(summary = "Synchronize job sources", description = "Manually triggers the ingestion process from all registered external job source adapters (requires ADMIN role).", tags = { "Administration" })
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Job synchronization complete"),
+        @ApiResponse(responseCode = "403", description = "Forbidden - Admin permissions required")
+    })
     public ResponseEntity<List<SyncReportDto>> synchronizeJobs() {
         List<SyncReportDto> reports = syncManager.synchronizeAll();
         return ResponseEntity.ok(reports);
     }
 
     @GetMapping
+    @Operation(summary = "Get active jobs", description = "Retrieves all currently active job postings in the database.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved active jobs list")
     public ResponseEntity<List<JobResponseDto>> getActiveJobs() {
         List<Job> activeJobs = jobRepository.findActiveJobs();
         List<JobResponseDto> response = activeJobs.stream()
@@ -39,6 +51,11 @@ public class JobController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get job details by ID", description = "Retrieves the full job description, eligibility rules, and location info for a specific job ID.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Successfully retrieved job details"),
+        @ApiResponse(responseCode = "404", description = "Job not found")
+    })
     public ResponseEntity<JobResponseDto> getJobById(@PathVariable Long id) {
         return jobRepository.findById(id)
                 .map(job -> ResponseEntity.ok(mapToResponseDto(job)))

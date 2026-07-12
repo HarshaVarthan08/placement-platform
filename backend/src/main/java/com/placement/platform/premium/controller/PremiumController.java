@@ -10,6 +10,10 @@ import com.placement.platform.premium.repository.PremiumWaitlistRepository;
 import com.placement.platform.premium.service.FeatureAvailabilityService;
 import com.placement.platform.premium.service.PremiumAccessService;
 import com.placement.platform.repository.UserRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,6 +30,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/premium")
+@Tag(name = "Premium", description = "Endpoints for checking feature catalog and joining early access waitlist")
 public class PremiumController {
 
     private static final Logger log = LoggerFactory.getLogger(PremiumController.class);
@@ -51,6 +56,8 @@ public class PremiumController {
     }
 
     @GetMapping("/catalog")
+    @Operation(summary = "Get premium features catalog", description = "Retrieves the full list of premium capabilities, including their availability status, descriptions, categories, and icon configurations.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved premium features catalog")
     public ResponseEntity<List<PremiumFeatureDto>> getCatalog() {
         List<PremiumFeatureDto> dtos = Arrays.stream(PremiumFeature.values())
                 .map(f -> {
@@ -71,6 +78,11 @@ public class PremiumController {
     }
 
     @PostMapping("/waitlist")
+    @Operation(summary = "Join premium feature waitlist", description = "Registers the candidate for early access notification when a premium AI feature launches.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Waitlist enrollment request processed successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid request details or waitlist registration is disabled")
+    })
     public ResponseEntity<Map<String, Object>> joinWaitlist(@RequestBody WaitlistRequestDto request) {
         if (!premiumProperties.isWaitlistEnabled()) {
             Map<String, Object> errorResponse = new HashMap<>();
@@ -109,16 +121,31 @@ public class PremiumController {
     }
 
     @PostMapping("/resume-optimizer")
+    @Operation(summary = "Premium Resume Optimizer (Placeholder)", description = "Access point for the AI Resume Optimizer. Enforces premium permission verification and returns coming soon status.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Premium access active - returns status"),
+        @ApiResponse(responseCode = "403", description = "Forbidden - Premium subscription required")
+    })
     public ResponseEntity<PremiumPlaceholderResponse> resumeOptimizer() {
         return getPlaceholderResponse(PremiumFeature.AI_RESUME_OPTIMIZER);
     }
 
     @PostMapping("/career-coach")
+    @Operation(summary = "Premium Career Coach (Placeholder)", description = "Access point for the AI Career Coach. Enforces premium permission verification and returns coming soon status.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Premium access active - returns status"),
+        @ApiResponse(responseCode = "403", description = "Forbidden - Premium subscription required")
+    })
     public ResponseEntity<PremiumPlaceholderResponse> careerCoach() {
         return getPlaceholderResponse(PremiumFeature.AI_CAREER_COACH);
     }
 
     @PostMapping("/interview-coach")
+    @Operation(summary = "Premium Interview Coach (Placeholder)", description = "Access point for the AI Interview Coach. Enforces premium permission verification and returns coming soon status.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Premium access active - returns status"),
+        @ApiResponse(responseCode = "403", description = "Forbidden - Premium subscription required")
+    })
     public ResponseEntity<PremiumPlaceholderResponse> interviewCoach() {
         return getPlaceholderResponse(PremiumFeature.AI_INTERVIEW_COACH);
     }

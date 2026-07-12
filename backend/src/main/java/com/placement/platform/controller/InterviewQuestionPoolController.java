@@ -10,6 +10,10 @@ import com.placement.platform.repository.InterviewQuestionRepository;
 import com.placement.platform.repository.UserRepository;
 import com.placement.platform.service.InterviewProfileService;
 import com.placement.platform.service.QuestionPoolGenerationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/interview/question-pool")
+@Tag(name = "Interview", description = "Endpoints for managing interview sessions and question progression")
 public class InterviewQuestionPoolController {
 
     private final UserRepository userRepository;
@@ -46,6 +51,8 @@ public class InterviewQuestionPoolController {
     }
 
     @PostMapping("/generate")
+    @Operation(summary = "Generate interview question pool", description = "Generates a list of tailored practice questions based on the candidate's target job role and profile skills. Reuses active pool if version matches.")
+    @ApiResponse(responseCode = "200", description = "Successfully generated or fetched active question pool")
     public ResponseEntity<QuestionPoolResponseDto> generateQuestionPool(
             @RequestParam(value = "difficulty", required = false, defaultValue = "MEDIUM") InterviewDifficulty difficulty
     ) {
@@ -73,6 +80,8 @@ public class InterviewQuestionPoolController {
     }
 
     @GetMapping("/status")
+    @Operation(summary = "Get question pool status", description = "Checks the status of the user's active question pool and determines if it is outdated compared to the latest profile updates.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved pool status details")
     public ResponseEntity<QuestionPoolStatusDto> getQuestionPoolStatus() {
         User user = getAuthenticatedUser();
         InterviewProfile profile = interviewProfileService.getOrCreateProfile(user);

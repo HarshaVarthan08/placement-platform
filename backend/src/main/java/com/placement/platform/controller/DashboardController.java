@@ -5,6 +5,9 @@ import com.placement.platform.entity.User;
 import com.placement.platform.exception.UserNotFoundException;
 import com.placement.platform.repository.UserRepository;
 import com.placement.platform.service.dashboard.PlacementIntelligenceService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/dashboard")
+@Tag(name = "Placement", description = "Endpoints for placement readiness dashboard and statistics")
 public class DashboardController {
 
     private final PlacementIntelligenceService placementIntelligenceService;
@@ -28,6 +32,8 @@ public class DashboardController {
     }
 
     @GetMapping
+    @Operation(summary = "Get user dashboard", description = "Retrieves overall metrics, ATS score, placement readiness index, activity logs, and target status.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved dashboard data")
     public ResponseEntity<DashboardResponseDto> getDashboard() {
         User user = getAuthenticatedUser();
         DashboardResponseDto response = placementIntelligenceService.getDashboardResponse(user);

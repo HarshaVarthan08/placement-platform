@@ -1,5 +1,7 @@
 package com.placement.platform.job.recommendation;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,8 @@ import java.util.Map;
 @Component
 public class ObsoleteConstraintDropper implements CommandLineRunner {
 
+    private static final Logger log = LoggerFactory.getLogger(ObsoleteConstraintDropper.class);
+
     private final DataSource dataSource;
 
     public ObsoleteConstraintDropper(DataSource dataSource) {
@@ -23,7 +27,7 @@ public class ObsoleteConstraintDropper implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Checking for obsolete database indexes on job_recommendations table...");
+        log.info("Checking for obsolete database indexes on job_recommendations table...");
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement()) {
             
@@ -42,7 +46,7 @@ public class ObsoleteConstraintDropper implements CommandLineRunner {
                 }
             }
             
-            System.out.println("Found unique indexes: " + indexColumns);
+            log.debug("Found unique indexes: {}", indexColumns);
 
             // 2. Find and drop the unique index on (user_id, job_id) only
             for (Map.Entry<String, List<String>> entry : indexColumns.entrySet()) {
@@ -51,18 +55,18 @@ public class ObsoleteConstraintDropper implements CommandLineRunner {
                 
                 // We want to drop the unique index on user_id, job_id that does not include generation_id
                 if (columns.size() == 2 && columns.contains("user_id") && columns.contains("job_id")) {
-                    System.out.println("Dropping obsolete unique constraint index: " + indexName + " on columns: " + columns);
+                    log.info("Dropping obsolete unique constraint index: {} on columns: {}", indexName, columns);
                     try {
                         stmt.executeUpdate("ALTER TABLE job_recommendations DROP INDEX " + indexName);
-                        System.out.println("Successfully dropped index: " + indexName);
+                        log.info("Successfully dropped index: {}", indexName);
                     } catch (Exception e) {
-                        System.err.println("Failed to drop obsolete index " + indexName + ": " + e.getMessage());
+                        log.error("Failed to drop obsolete index {}: {}", indexName, e.getMessage());
                     }
                 }
             }
             
         } catch (Exception e) {
-            System.err.println("Could not query or alter table index. This is expected if table does not exist or index is already dropped: " + e.getMessage());
+            log.warn("Could not query or alter table index. This is expected if table does not exist or index is already dropped: {}", e.getMessage());
         }
     }
 }

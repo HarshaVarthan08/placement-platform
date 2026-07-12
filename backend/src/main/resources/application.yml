@@ -1,0 +1,105 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/placement_platform?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET:default_fallback_jwt_secret_key_should_be_long_enough_to_comply_with_hs256_requirements_minimum_256_bits}
+      expiration: 86400000
+  resume:
+    upload-dir: uploads/resumes
+  interview:
+    cooldown-hours: 12
+    learning:
+      global-ratio: 60
+      personalized-ratio: 40
+      questions: 10
+    default-total-questions: 5
+    mock:
+      questions: 15
+  dashboard:
+    health:
+      resume-days: 30
+      interview-days: 30
+      profile-days: 60
+    ats:
+      threshold: 80
+    readiness:
+      resume-weight: 30
+      interview-weight: 35
+      profile-weight: 15
+      skills-weight: 10
+      company-weight: 10
+  jobs:
+    sync:
+      enabled: true
+    static:
+      path: jobs/jobs.json
+    archive:
+      days: 90
+    matching:
+      weight:
+        skills: 35
+        role: 20
+        eligibility: 15
+        resume: 10
+        experience: 10
+        education: 5
+        location: 5
+
+gemini:
+  api:
+    key: ${GEMINI_API_KEY:}
+  model: gemini-2.5-flash
+
+career:
+  confidence:
+    matchWeight: 40
+    placementWeight: 25
+    resumeWeight: 20
+    interviewWeight: 15
+  preparation:
+    weeks:
+      low: 2
+      medium: 4
+      high: 6
+      very-high: 8
+  difficulty:
+    veryHighThreshold: 10
+    highThreshold: 7
+    mediumThreshold: 4
+
+premium:
+  enabled: false
+  launchQuarter: Q4 2026
+  waitlist:
+    enabled: true
+  defaultSubscription: FREE
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

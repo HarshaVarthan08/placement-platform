@@ -28,11 +28,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.placement.platform.service.InterviewProfileService;
 
 @Service
 public class ResumeServiceImpl implements ResumeService {
+
+    private static final Logger log = LoggerFactory.getLogger(ResumeServiceImpl.class);
 
     private final ResumeRepository resumeRepository;
     private final UserRepository userRepository;
@@ -150,7 +154,7 @@ public class ResumeServiceImpl implements ResumeService {
             Files.deleteIfExists(oldPath);
         } catch (IOException e) {
             // Log issue but proceed to store the new one
-            System.err.println("Could not delete old resume file: " + oldPath.toString());
+            log.error("Could not delete old resume file: {}", oldPath, e);
         }
 
         // Save the new file to disk
@@ -198,7 +202,7 @@ public class ResumeServiceImpl implements ResumeService {
         try {
             Files.deleteIfExists(filePath);
         } catch (IOException e) {
-            System.err.println("Could not delete physical resume file: " + filePath.toString());
+            log.error("Could not delete physical resume file: {}", filePath, e);
         }
 
         // Delete from database

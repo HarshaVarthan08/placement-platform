@@ -6,6 +6,10 @@ import com.placement.platform.job.dto.*;
 import com.placement.platform.job.entity.Job;
 import com.placement.platform.job.repository.JobRepository;
 import com.placement.platform.repository.UserRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,6 +25,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/jobs/recommendations")
+@Tag(name = "Jobs", description = "Endpoints for retrieving active job details")
 public class JobRecommendationController {
 
     private final RecommendationService recommendationService;
@@ -50,6 +55,8 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/generate")
+    @Operation(summary = "Generate job recommendations", description = "Generates a list of matching job recommendations based on the candidate's active profile and resume.")
+    @ApiResponse(responseCode = "200", description = "Successfully generated recommendations")
     public ResponseEntity<List<JobRecommendationResponseDto>> generateRecommendations() {
         User user = getAuthenticatedUser();
         List<JobRecommendation> recommendations = recommendationService.generateRecommendations(user);
@@ -69,6 +76,8 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/refresh")
+    @Operation(summary = "Refresh job recommendations", description = "Manually triggers a regeneration of recommendations for the authenticated user.")
+    @ApiResponse(responseCode = "200", description = "Successfully refreshed recommendations")
     public ResponseEntity<List<JobRecommendationResponseDto>> refreshRecommendations() {
         User user = getAuthenticatedUser();
         List<JobRecommendation> recommendations = recommendationService.generateRecommendations(user, RecommendationGenerationReason.MANUAL);
@@ -88,6 +97,8 @@ public class JobRecommendationController {
     }
 
     @GetMapping
+    @Operation(summary = "Get paginated recommendations", description = "Retrieves the active list of recommendations generated for the user's latest profile version.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved recommendations page")
     public ResponseEntity<Page<JobRecommendationResponseDto>> getRecommendations(Pageable pageable) {
         User user = getAuthenticatedUser();
         Page<JobRecommendation> recommendationsPage = recommendationService.getRecommendations(user, pageable);
@@ -108,6 +119,8 @@ public class JobRecommendationController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Get recommendation details", description = "Retrieves details of a specific job recommendation including match score breakdowns.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved recommendation details")
     public ResponseEntity<JobRecommendationResponseDto> getRecommendationDetails(@PathVariable Long id) {
         JobRecommendation recommendation = recommendationService.getRecommendationDetails(id);
         Optional<Job> jobOpt = jobRepository.findById(recommendation.getJobId());
@@ -116,6 +129,8 @@ public class JobRecommendationController {
     }
 
     @GetMapping("/summary")
+    @Operation(summary = "Get recommendations summary", description = "Retrieves high-level metrics for the user's recommendations (total count, strong matches, averages).")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved summary")
     public ResponseEntity<RecommendationSummaryDto> getRecommendationSummary() {
         User user = getAuthenticatedUser();
         RecommendationSummaryDto summary = recommendationService.getRecommendationSummary(user);
@@ -123,6 +138,8 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/{id}/view")
+    @Operation(summary = "Mark recommendation as viewed", description = "Increments the view count and sets the viewed timestamp on a job recommendation.")
+    @ApiResponse(responseCode = "200", description = "Recommendation successfully marked as viewed")
     public ResponseEntity<JobRecommendationResponseDto> markViewed(@PathVariable Long id) {
         JobRecommendation rec = lifecycleService.markViewed(id);
         Optional<Job> jobOpt = jobRepository.findById(rec.getJobId());
@@ -130,6 +147,8 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/{id}/save")
+    @Operation(summary = "Save recommendation", description = "Saves a job recommendation for future reference.")
+    @ApiResponse(responseCode = "200", description = "Recommendation successfully saved")
     public ResponseEntity<JobRecommendationResponseDto> saveRecommendation(@PathVariable Long id) {
         JobRecommendation rec = lifecycleService.saveRecommendation(id);
         Optional<Job> jobOpt = jobRepository.findById(rec.getJobId());
@@ -137,6 +156,8 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/{id}/unsave")
+    @Operation(summary = "Unsave recommendation", description = "Reverts a saved job recommendation back to active status.")
+    @ApiResponse(responseCode = "200", description = "Recommendation successfully unsaved")
     public ResponseEntity<JobRecommendationResponseDto> unsaveRecommendation(@PathVariable Long id) {
         JobRecommendation rec = lifecycleService.unsaveRecommendation(id);
         Optional<Job> jobOpt = jobRepository.findById(rec.getJobId());
@@ -144,6 +165,8 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/{id}/hide")
+    @Operation(summary = "Hide recommendation", description = "Hides a job recommendation from the active recommendations feed.")
+    @ApiResponse(responseCode = "200", description = "Recommendation successfully hidden")
     public ResponseEntity<JobRecommendationResponseDto> hideRecommendation(@PathVariable Long id) {
         JobRecommendation rec = lifecycleService.hideRecommendation(id);
         Optional<Job> jobOpt = jobRepository.findById(rec.getJobId());
@@ -151,6 +174,8 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/{id}/archive")
+    @Operation(summary = "Archive recommendation", description = "Archives a job recommendation.")
+    @ApiResponse(responseCode = "200", description = "Recommendation successfully archived")
     public ResponseEntity<JobRecommendationResponseDto> archiveRecommendation(@PathVariable Long id) {
         JobRecommendation rec = lifecycleService.archiveRecommendation(id);
         Optional<Job> jobOpt = jobRepository.findById(rec.getJobId());
@@ -158,6 +183,8 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/{id}/feedback")
+    @Operation(summary = "Submit feedback on recommendation", description = "Submits structured feedback (e.g. positive/negative) and textual comments on a job recommendation.")
+    @ApiResponse(responseCode = "200", description = "Feedback successfully submitted")
     public ResponseEntity<JobRecommendationResponseDto> submitFeedback(
             @PathVariable Long id,
             @Valid @RequestBody FeedbackRequestDto request) {
@@ -167,6 +194,8 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/{id}/apply")
+    @Operation(summary = "Mark recommendation as applied", description = "Tracks a job application against the recommendation, recording the application URL, external reference, and notes.")
+    @ApiResponse(responseCode = "200", description = "Recommendation successfully updated to APPLIED status")
     public ResponseEntity<JobRecommendationResponseDto> applyForRecommendation(
             @PathVariable Long id,
             @Valid @RequestBody ApplicationRequestDto request) {
@@ -177,6 +206,8 @@ public class JobRecommendationController {
     }
 
     @PutMapping("/{id}/application")
+    @Operation(summary = "Update job application stage", description = "Updates the stage of the application tracking (e.g. INTERVIEWING, OFFER, REJECTED) with custom notes.")
+    @ApiResponse(responseCode = "200", description = "Application status successfully updated")
     public ResponseEntity<JobRecommendationResponseDto> updateApplicationStage(
             @PathVariable Long id,
             @Valid @RequestBody ApplicationUpdateRequestDto request) {
@@ -186,6 +217,8 @@ public class JobRecommendationController {
     }
 
     @GetMapping("/applied")
+    @Operation(summary = "Get user's job applications", description = "Retrieves a paginated list of recommendations that the candidate has marked as APPLIED or progressed further.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved applied recommendations page")
     public ResponseEntity<Page<AppliedRecommendationResponseDto>> getAppliedRecommendations(Pageable pageable) {
         User user = getAuthenticatedUser();
         Page<JobRecommendation> page = applicationTrackingService.getAppliedRecommendations(user, pageable);
@@ -203,6 +236,8 @@ public class JobRecommendationController {
     }
 
     @GetMapping("/saved")
+    @Operation(summary = "Get user's saved recommendations", description = "Retrieves a paginated list of recommendations that the candidate has saved.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved saved recommendations page")
     public ResponseEntity<Page<SavedRecommendationResponseDto>> getSavedRecommendations(Pageable pageable) {
         User user = getAuthenticatedUser();
         Page<JobRecommendation> page = jobRecommendationRepository
@@ -221,6 +256,8 @@ public class JobRecommendationController {
     }
 
     @GetMapping("/analytics")
+    @Operation(summary = "Get recommendation analytics", description = "Retrieves stats on job matching status counts, average scores, and optionally includes generation run histories.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved recommendation analytics")
     public ResponseEntity<RecommendationAnalyticsResponseDto> getAnalytics(
             @RequestParam(value = "includeHistory", defaultValue = "false") boolean includeHistory) {
         User user = getAuthenticatedUser();
@@ -229,6 +266,8 @@ public class JobRecommendationController {
     }
 
     @GetMapping("/history")
+    @Operation(summary = "Get recommendation generation run history", description = "Retrieves all historically generated recommendation runs, grouped by generation ID.")
+    @ApiResponse(responseCode = "200", description = "Successfully retrieved recommendation history list")
     public ResponseEntity<List<RecommendationHistoryResponseDto>> getHistory() {
         User user = getAuthenticatedUser();
         List<JobRecommendation> allRecs = jobRecommendationRepository.findByUserId(user.getId());
@@ -270,6 +309,11 @@ public class JobRecommendationController {
     }
 
     @GetMapping("/{id}/timeline")
+    @Operation(summary = "Get recommendation timeline events", description = "Retrieves all state changes and interaction history events (viewed, saved, applied, feedback) for a specific job recommendation in chronological order.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Successfully retrieved timeline events list"),
+        @ApiResponse(responseCode = "404", description = "Job recommendation not found")
+    })
     public ResponseEntity<RecommendationTimelineResponseDto> getTimeline(@PathVariable Long id) {
         JobRecommendation rec = recommendationService.getRecommendationDetails(id);
         Optional<Job> jobOpt = jobRepository.findById(rec.getJobId());
