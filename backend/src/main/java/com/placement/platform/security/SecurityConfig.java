@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/register", "/api/auth/login", "/api/health").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/jobs/sync").hasRole("ADMIN")
                 .requestMatchers("/api/jobs/**").authenticated()
+                .requestMatchers("/api/career/**").authenticated()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session
