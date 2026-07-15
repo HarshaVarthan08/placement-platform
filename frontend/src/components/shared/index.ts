@@ -1,2 +1,1 @@
-// Shared components barrel export placeholder
-export {};
+export * from './Footer';

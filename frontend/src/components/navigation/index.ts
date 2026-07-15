@@ -1,2 +1,1 @@
-// Navigation components barrel export placeholder
-export {};
+export * from './Navbar';

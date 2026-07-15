@@ -12,9 +12,9 @@ export const AppRoutes = () => {
         <Route path={ROUTES.REGISTER} element={<Register />} />
         <Route path={ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} />
         <Route path={ROUTES.VERIFY_EMAIL} element={<VerifyEmail />} />
+        <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+        <Route path="*" element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
       </Route>
-      <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-      <Route path="*" element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
     </Routes>
   );
 };

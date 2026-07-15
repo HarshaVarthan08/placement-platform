@@ -1,2 +1,1 @@
-// Hooks barrel export placeholder
-export {};
+export * from './useScrolled';
