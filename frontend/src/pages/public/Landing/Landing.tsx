@@ -1,23 +1,16 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import { Hero } from '../../../components';
 
 export const Landing = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        minHeight: '100vh',
+        width: '100%',
         backgroundColor: 'background.default',
       }}
     >
-      <Typography variant="h1" gutterBottom>
-        Landing Page
-      </Typography>
-      <Typography variant="h4" color="text.secondary">
-        Coming Soon
-      </Typography>
+      {/* Landing Hero Section */}
+      <Hero />
     </Box>
   );
 };

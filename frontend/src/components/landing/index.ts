@@ -1,2 +1,2 @@
-// Landing components barrel export placeholder
-export {};
+export * from './Hero';
+export * from './CareerOrbit';
