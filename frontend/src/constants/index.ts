@@ -7,3 +7,4 @@ export * from './footer';
 export * from './branding';
 export * from './hero';
 export * from './careerOrbit';
+export * from './features';
