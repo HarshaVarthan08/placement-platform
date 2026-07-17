@@ -205,4 +205,3 @@ export const FeatureModule: React.FC<FeatureModuleProps> = ({
 };
 
 export default FeatureModule;
-
