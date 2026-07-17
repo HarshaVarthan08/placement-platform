@@ -13,7 +13,7 @@ export const FOOTER_SECTIONS: FooterSection[] = [
   {
     title: 'Company',
     links: [
-      { label: 'About', to: '/#about' },
+      { label: 'Our Story', to: '/#about' },
       { label: 'Careers', to: '/#careers', isPlaceholder: true },
       { label: 'Contact', to: '/#contact', isPlaceholder: true },
     ],

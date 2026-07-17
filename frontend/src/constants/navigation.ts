@@ -10,7 +10,7 @@ export const PUBLIC_NAVIGATION_ITEMS: NavigationItemType[] = [
   { label: 'Features', to: '/#features', isHash: true },
   { label: 'How It Works', to: '/#how-it-works', isHash: true },
   { label: 'Pricing', to: '/#pricing', isHash: true },
-  { label: 'About', to: '/#about', isHash: true },
+  { label: 'Our Story', to: '/#about', isHash: true },
 ];
 
 export const AUTH_NAVIGATION_ITEMS = {

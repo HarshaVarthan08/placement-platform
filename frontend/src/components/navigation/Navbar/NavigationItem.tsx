@@ -31,6 +31,7 @@ export const NavigationItem = ({ label, to, isHash, onClick }: NavigationItemPro
       if (element) {
         e.preventDefault();
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        navigate(to);
       } else {
         // If element doesn't exist, we let it fall back gracefully.
         // If we are not on the landing page, we want standard navigation to '/' with hash.
