@@ -5,3 +5,4 @@ export * from './HowItWorks';
 export * from './Pricing';
 export * from './About';
 export * from './CTA';
+export { Footer as LandingFooter } from './Footer';

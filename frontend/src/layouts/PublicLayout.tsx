@@ -1,9 +1,13 @@
 import { Box } from '@mui/material';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Navbar } from '../components/navigation';
 import { Footer } from '../components/shared';
+import { ROUTES } from '../constants';
 
 export const PublicLayout = () => {
+  const location = useLocation();
+  const isLandingPage = location.pathname === ROUTES.LANDING;
+
   return (
     <Box
       sx={{
@@ -30,7 +34,7 @@ export const PublicLayout = () => {
       </Box>
 
       {/* Footer Section */}
-      <Footer />
+      {!isLandingPage && <Footer />}
     </Box>
   );
 };
