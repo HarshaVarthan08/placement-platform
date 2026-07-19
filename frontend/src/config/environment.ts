@@ -7,7 +7,7 @@ interface Environment {
 }
 
 export const env: Environment = {
-  apiUrl: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  apiUrl: import.meta.env.VITE_API_URL || 'http://localhost:8081/api',
   appName: import.meta.env.VITE_APP_NAME || 'AI Placement Platform',
   env: (import.meta.env.VITE_APP_ENV as Environment['env']) || 'development',
   isDev: import.meta.env.DEV,

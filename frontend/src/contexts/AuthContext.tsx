@@ -65,11 +65,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(true);
       try {
         const response = await api.post<LoginResponse>('/auth/login', credentials);
-        const { token: receivedToken, user } = response.data;
+        const { token: receivedToken, user: responseUser, userId } = response.data;
 
         if (!receivedToken) {
           throw new Error('Malformed token response from API');
         }
+
+        const decoded = decodeToken(receivedToken);
+        const user: User = responseUser || {
+          id: decoded?.id || decoded?.sub || String(userId || ''),
+          email: decoded?.email || decoded?.sub || credentials.email,
+          name: decoded?.name || '',
+          role: decoded?.role || 'STUDENT',
+        };
 
         localStorage.setItem('token', receivedToken);
         setToken(receivedToken);

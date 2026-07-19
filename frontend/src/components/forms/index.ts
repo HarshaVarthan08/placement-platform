@@ -1,2 +1,2 @@
 // Forms components barrel export placeholder
-export {};
+export * from './FormTextField';

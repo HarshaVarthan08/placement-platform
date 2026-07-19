@@ -12,7 +12,8 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   token: string;
-  user: User;
+  user?: User;
+  userId?: number;
 }
 
 export interface DecodedJwt {
