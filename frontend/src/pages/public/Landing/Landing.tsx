@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Hero, Features, HowItWorks, Pricing, About } from '../../../components';
+import { Hero, Features, HowItWorks, Pricing, About, CTA } from '../../../components';
 
 export const Landing = () => {
   return (
@@ -23,9 +23,11 @@ export const Landing = () => {
 
       {/* Landing About / Why AI Placement Platform Section */}
       <About />
+
+      {/* Final Call to Action Section */}
+      <CTA />
     </Box>
   );
 };
-
 
 export default Landing;

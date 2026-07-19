@@ -37,7 +37,8 @@ export const PricingHeader: React.FC = () => {
           lineHeight: 1.6,
         }}
       >
-        Choose the plan that fits your career goals. Level up your placement prep with AI-powered coaching.
+        Choose the plan that fits your career goals. Level up your placement prep with AI-powered
+        coaching.
       </Typography>
     </Box>
   );

@@ -17,7 +17,16 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, index }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const prefersReducedMotion = useReducedMotion();
-  const { name, priceLabel, description, features, buttonText, buttonVariant, isPopular, buttonAction } = plan;
+  const {
+    name,
+    priceLabel,
+    description,
+    features,
+    buttonText,
+    buttonVariant,
+    isPopular,
+    buttonAction,
+  } = plan;
 
   const isComingSoon = buttonAction === 'coming-soon';
   const isLongLabel = priceLabel.length > 8;
@@ -60,7 +69,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, index }) => {
         transition: prefersReducedMotion
           ? 'none'
           : 'box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease, background-color 0.3s ease',
-        
+
         // Emphasize the Pro card subtly using a purple border, stronger shadow, and very soft gradient background
         border: isPopular
           ? `2px solid ${theme.palette.secondary.main}`
@@ -101,7 +110,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, index }) => {
         >
           {name}
         </Typography>
-        
+
         <Typography
           variant="body2"
           sx={{
