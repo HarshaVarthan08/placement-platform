@@ -1,33 +1,18 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { PublicLayout } from '../layouts';
+import { PublicLayout, DashboardLayout } from '../layouts';
 import { ROUTES } from '../constants';
-import { Landing, Login, Register, ForgotPassword, VerifyEmail, NotFound } from '../pages';
+import {
+  Landing,
+  Login,
+  Register,
+  ForgotPassword,
+  VerifyEmail,
+  NotFound,
+  DashboardPlaceholder,
+  FeaturePlaceholder,
+} from '../pages';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicOnlyRoute } from './PublicOnlyRoute';
-import { Box, Typography } from '@mui/material';
-
-// Minimal placeholders for private routes used for route validation
-const Placeholder = ({ name }: { name: string }) => (
-  <Box
-    sx={{
-      p: 4,
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '80vh',
-      backgroundColor: 'background.default',
-      color: 'text.primary',
-    }}
-  >
-    <Typography variant="h3" gutterBottom>
-      {name} Page
-    </Typography>
-    <Typography variant="h6" color="text.secondary">
-      This is a minimal placeholder for the {name.toLowerCase()} route.
-    </Typography>
-  </Box>
-);
 
 export const AppRoutes = () => {
   return (
@@ -73,71 +58,79 @@ export const AppRoutes = () => {
         <Route path={ROUTES.PUBLIC.NOT_FOUND} element={<NotFound />} />
       </Route>
 
-      {/* Protected Routes */}
+      {/* Protected Routes nested within DashboardLayout */}
       <Route
-        path={ROUTES.PRIVATE.DASHBOARD}
         element={
           <ProtectedRoute>
-            <Placeholder name="Dashboard" />
+            <DashboardLayout />
           </ProtectedRoute>
         }
-      />
-      <Route
-        path={ROUTES.PRIVATE.RESUME}
-        element={
-          <ProtectedRoute>
-            <Placeholder name="Resume Analyzer" />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={ROUTES.PRIVATE.INTERVIEW}
-        element={
-          <ProtectedRoute>
-            <Placeholder name="Interview Prep" />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={ROUTES.PRIVATE.COMPANY}
-        element={
-          <ProtectedRoute>
-            <Placeholder name="Company Prep" />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={ROUTES.PRIVATE.APPLICATIONS}
-        element={
-          <ProtectedRoute>
-            <Placeholder name="Applications" />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={ROUTES.PRIVATE.PROGRESS}
-        element={
-          <ProtectedRoute>
-            <Placeholder name="Progress" />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={ROUTES.PRIVATE.PROFILE}
-        element={
-          <ProtectedRoute>
-            <Placeholder name="Profile" />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path={ROUTES.PRIVATE.SETTINGS}
-        element={
-          <ProtectedRoute>
-            <Placeholder name="Settings" />
-          </ProtectedRoute>
-        }
-      />
+      >
+        <Route path={ROUTES.PRIVATE.DASHBOARD} element={<DashboardPlaceholder />} />
+        <Route
+          path={ROUTES.PRIVATE.RESUME}
+          element={
+            <FeaturePlaceholder
+              pageTitle="Resume Analyzer"
+              description="Analyze your resume against job descriptions, optimize keywords, and boost your ATS score."
+            />
+          }
+        />
+        <Route
+          path={ROUTES.PRIVATE.INTERVIEW}
+          element={
+            <FeaturePlaceholder
+              pageTitle="Interview Prep"
+              description="Practice with simulated mock interviews, receive real-time feedback, and master technical questions."
+            />
+          }
+        />
+        <Route
+          path={ROUTES.PRIVATE.COMPANY}
+          element={
+            <FeaturePlaceholder
+              pageTitle="Company Prep"
+              description="Research company profiles, track specific targets, and prepare custom question guides."
+            />
+          }
+        />
+        <Route
+          path={ROUTES.PRIVATE.APPLICATIONS}
+          element={
+            <FeaturePlaceholder
+              pageTitle="Applications"
+              description="Track job applications, manage stages, and monitor interview schedules."
+            />
+          }
+        />
+        <Route
+          path={ROUTES.PRIVATE.PROGRESS}
+          element={
+            <FeaturePlaceholder
+              pageTitle="Progress"
+              description="Monitor prep completion, track metrics history, and hit your milestones."
+            />
+          }
+        />
+        <Route
+          path={ROUTES.PRIVATE.PROFILE}
+          element={
+            <FeaturePlaceholder
+              pageTitle="Profile"
+              description="Manage your personal details, academic credentials, and career preferences."
+            />
+          }
+        />
+        <Route
+          path={ROUTES.PRIVATE.SETTINGS}
+          element={
+            <FeaturePlaceholder
+              pageTitle="Settings"
+              description="Configure account preferences, notifications toggle, and security properties."
+            />
+          }
+        />
+      </Route>
 
       {/* Wildcard Fallback */}
       <Route path="*" element={<Navigate to={ROUTES.PUBLIC.NOT_FOUND} replace />} />
