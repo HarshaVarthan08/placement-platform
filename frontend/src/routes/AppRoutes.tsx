@@ -8,8 +8,8 @@ import {
   ForgotPassword,
   VerifyEmail,
   NotFound,
-  DashboardPlaceholder,
   FeaturePlaceholder,
+  DashboardHome,
 } from '../pages';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PublicOnlyRoute } from './PublicOnlyRoute';
@@ -66,7 +66,7 @@ export const AppRoutes = () => {
           </ProtectedRoute>
         }
       >
-        <Route path={ROUTES.PRIVATE.DASHBOARD} element={<DashboardPlaceholder />} />
+        <Route path={ROUTES.PRIVATE.DASHBOARD} element={<DashboardHome />} />
         <Route
           path={ROUTES.PRIVATE.RESUME}
           element={
